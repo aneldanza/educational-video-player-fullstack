@@ -1,7 +1,4 @@
-// import { useState } from "react"
-
-export const App = () => {
-  // const [videos, setVideos] = useState<{}>()
+export function App() {
   return (
     <div className="flex-col">
       <nav className="flex bg-slate-200 p-2 justify-between">
@@ -15,8 +12,6 @@ export const App = () => {
         </button>
       </nav>
       <main className="bg-slate-700 p-2">
-        <div className="text-white">Videos</div>
-        <div className="text-blue-200">list of videos here now...</div>
         {/* {error ? (
             <div>there was an error!</div>
           ) : isLoading ? (
@@ -31,4 +26,4 @@ export const App = () => {
       </main>
     </div>
   );
-};
+}
