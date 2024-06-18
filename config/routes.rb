@@ -8,4 +8,10 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root "homepage#index"
+
+  namespace :api do
+    namespace :v1 do
+      resources :videos, only: [:index, :create]
+    end
+  end
 end
