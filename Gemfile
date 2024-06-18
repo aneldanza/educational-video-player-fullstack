@@ -24,3 +24,5 @@ group :development do
   # gem "spring"
 end
 
+
+gem "faraday", "~> 2.9"
