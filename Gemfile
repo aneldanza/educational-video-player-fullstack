@@ -26,3 +26,5 @@ end
 
 
 gem "faraday", "~> 2.9"
+
+gem 'vite_rails'
