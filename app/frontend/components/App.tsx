@@ -16,6 +16,8 @@ export const App = () => {
           </button>
         </nav>
         <main className="bg-slate-700 p-2">
+          <div className="text-white">Videos</div>
+          <div>list of videos here now</div>
           {/* {error ? (
             <div>there was an error!</div>
           ) : isLoading ? (
