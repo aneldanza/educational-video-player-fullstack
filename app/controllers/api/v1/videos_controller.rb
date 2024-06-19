@@ -26,11 +26,6 @@ class Api::V1::VideosController < ApplicationController
     
     if response.status === 200
       render json: JSON.parse(response.body)
-      # all_videos_res =  get_all_user_videos_response(params[:user_id])
-      # if all_videos_res.status === 200
-      #   @videos = JSON.parse(response.body)
-      #   render json: @videos
-      # end
     else
       render json: 'COULD NOT CREATE NEW VIDEO'
     end
@@ -39,8 +34,7 @@ class Api::V1::VideosController < ApplicationController
   def get_all_user_videos_response(user_id)
     connection = Faraday.new(url: 'https://take-home-assessment-423502.uc.r.appspot.com/api')
 
-    response = connection.get do |req|
-      req.url '/videos'
+    response = connection.get('/videos') do |req|
       req.headers['Content-Type'] = 'application/json'
       req.params = {"user_id": user_id}
     end
