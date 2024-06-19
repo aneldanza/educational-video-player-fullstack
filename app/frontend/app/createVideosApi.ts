@@ -51,7 +51,33 @@ import {
           console.log(arg);
         },
       }),
+      uploadVideo: builder.mutation<any, {video: any, csrfToken: string}>({
+        query: (payload) => {
+            return {
+                url: "videos",
+                method: 'post',
+                body: JSON.stringify(payload.video),
+                headers: {
+                    "Content-Type": "application/json",
+                    Accept: "application/json",
+                    "X-CSRF-Token": payload.csrfToken,
+                }
+            }
+        },
+        transformResponse: (res: any) => {
+            return res;
+        },
+        transformErrorResponse: (
+            val: FetchBaseQueryError,
+            meta: FetchBaseQueryMeta | undefined,
+            arg: any
+          ) => {
+            console.log(val);
+            console.log(meta);
+            console.log(arg);
+          },
+      })
     }),
   });
   
-  export const { useGetVideoByUserIdQuery } = videosApi;
+  export const { useGetVideoByUserIdQuery, useUploadVideoMutation } = videosApi;
