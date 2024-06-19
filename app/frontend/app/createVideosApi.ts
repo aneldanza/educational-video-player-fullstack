@@ -38,7 +38,9 @@ import {
           };
         },
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        transformResponse: (res: any) => res.data,
+        transformResponse: (res: any) => {
+            return res
+        },
         transformErrorResponse: (
           val: FetchBaseQueryError,
           meta: FetchBaseQueryMeta | undefined,
