@@ -29,14 +29,16 @@ import {
   export const videosApi = createApi({
     reducerPath: "videosApi",
     baseQuery: baseQuery,
+    tagTypes: ['Video'],
     endpoints: (builder) => ({
-      getVideoByUserId: builder.query<{videos: Video[]}, string>({
+      getVideosByUserId: builder.query<{videos: Video[]}, string>({
         query: (userId) => {
           return {
             url: "/videos",
             params: { user_id: userId },
           };
         },
+        providesTags: ['Video'],
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         transformResponse: (res: any) => {
             return res
@@ -64,6 +66,7 @@ import {
                 }
             }
         },
+        invalidatesTags: ['Video'],
         transformResponse: (res: any) => {
             return res;
         },
@@ -80,4 +83,4 @@ import {
     }),
   });
   
-  export const { useGetVideoByUserIdQuery, useUploadVideoMutation } = videosApi;
+  export const { useGetVideosByUserIdQuery, useUploadVideoMutation } = videosApi;

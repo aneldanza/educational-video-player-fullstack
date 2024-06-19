@@ -1,5 +1,5 @@
 import {
-  useGetVideoByUserIdQuery,
+  useGetVideosByUserIdQuery,
   useUploadVideoMutation,
 } from "../app/createVideosApi";
 
@@ -9,25 +9,25 @@ function csrfToken() {
   const meta = document.querySelector("meta[name=csrf-token]");
   const token = meta && meta.getAttribute("content");
 
-  return token ?? false;
+  return token ?? "";
 }
 
 export function App() {
-  const { data, error, isLoading, isError, isSuccess } =
-    useGetVideoByUserIdQuery(userId);
+  const { data, error, isLoading, isError, isSuccess, isFetching } =
+    useGetVideosByUserIdQuery(userId);
   const [uploadVideo] = useUploadVideoMutation();
 
   // const canSave = [title, content, userId].every(Boolean)
 
   const uploadNewVideo = async () => {
     const video = {
-      title: "THE SEED",
-      description: "Inspirational Short Film",
-      video_url: "https://youtu.be/sVPYIRF9RCQ?si=hBXm1yHSO00svGDN",
+      title: "One Earth",
+      description: "Environmental Short Film",
+      video_url: "https://youtu.be/QQYgCxu988s?si=4RcBhqzxE6jclaLW",
       user_id: "anel_danza",
     };
 
-    const token = csrfToken() || "";
+    const token = csrfToken();
 
     try {
       await uploadVideo({ video, csrfToken: token }).unwrap();
@@ -42,7 +42,11 @@ export function App() {
     content = <div>Loading...</div>;
   } else if (isSuccess) {
     content = (
-      <ul className="flex-col divide-y divide-white">
+      <ul
+        className={`flex-col divide-y divide-white ${
+          "opacity-50" && isFetching
+        }`}
+      >
         {data.videos.map((video, i) => {
           return <li key={`video-${i}`}>{video.title}</li>;
         })}
