@@ -1,22 +1,27 @@
 import { useGetVideoByIdQuery } from "../app/createVideosApi";
+import { useParams } from "react-router-dom";
 
-interface VideoProps {
-  videoId: string;
-}
+interface VideoProps {}
 
-export const Video: React.FC<VideoProps> = ({ videoId }) => {
-  const { data, isLoading, isError, isSuccess, error } =
-    useGetVideoByIdQuery(videoId);
+export const Video: React.FC<VideoProps> = () => {
+  const { videoId } = useParams();
+  const { data, isLoading, isError, isSuccess, error } = useGetVideoByIdQuery(
+    videoId || ""
+  );
 
   let content;
 
   if (isLoading) {
     content = <div>Loading...</div>;
   } else if (isSuccess) {
-    content = <ul className={`flex-col divide-y divide-white `}>{data}</ul>;
+    content = (
+      <ul className={`flex-col divide-y divide-white `}>{data.title}</ul>
+    );
   } else if (isError) {
     content = <div>{error.toString()}</div>;
   }
 
-  return <>{content}</>;
+  return <>
+  <div>Single Video Page</div>
+  {content}</>;
 };
