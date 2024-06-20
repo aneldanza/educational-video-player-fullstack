@@ -42,11 +42,7 @@ export function App() {
     content = <div>Loading...</div>;
   } else if (isSuccess) {
     content = (
-      <ul
-        className={`flex-col divide-y divide-white ${
-          "opacity-50" && isFetching
-        }`}
-      >
+      <ul className={`flex-col divide-y divide-white `}>
         {data.videos.map((video, i) => {
           return <li key={`video-${i}`}>{video.title}</li>;
         })}
@@ -68,7 +64,11 @@ export function App() {
           Upload
         </button>
       </nav>
-      <main className="bg-slate-700 p-2 text-white">{content}</main>
+      <main
+        className={`bg-slate-700 p-2 text-white ${"opacity-50" && isFetching}`}
+      >
+        {content}
+      </main>
     </div>
   );
 }
