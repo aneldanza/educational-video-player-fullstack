@@ -2,6 +2,7 @@ import {
   useGetVideosByUserIdQuery,
   useUploadVideoMutation,
 } from "../app/createVideosApi";
+import { Link } from 'react-router-dom'
 
 const userId = "anel_danza";
 
@@ -36,6 +37,7 @@ export function App() {
     }
   };
 
+
   let content;
 
   if (isLoading) {
@@ -44,7 +46,7 @@ export function App() {
     content = (
       <ul className={`flex-col divide-y divide-white `}>
         {data.videos.map((video, i) => {
-          return <li key={`video-${i}`}>{video.title}</li>;
+          return <li key={`video-${i}`}><Link to={`videos/${video.id}`} className="text-white">{video.title}</Link></li>;
         })}
       </ul>
     );
