@@ -3,7 +3,7 @@ import type {
   FetchBaseQueryMeta,
   FetchBaseQueryError,
 } from "@reduxjs/toolkit/query";
-import { Video } from "../types";
+import { Video, VideoData } from "../types";
 
 const baseUrl = "/api/v1";
 
@@ -17,7 +17,7 @@ export const videosApi = createApi({
   baseQuery: baseQuery,
   tagTypes: ["Video"],
   endpoints: (builder) => ({
-    getVideosByUserId: builder.query<{ videos: Video[] }, string>({
+    getVideosByUserId: builder.query<{ videos: VideoData[] }, string>({
       query: (userId) => {
         return {
           url: "/videos",
@@ -35,7 +35,7 @@ export const videosApi = createApi({
         console.log(arg);
       },
     }),
-    uploadVideo: builder.mutation<any, { video: any; csrfToken: string }>({
+    uploadVideo: builder.mutation<any, { video: Video; csrfToken: string }>({
       query: (payload) => {
         return {
           url: "videos",
@@ -59,8 +59,8 @@ export const videosApi = createApi({
         console.log(arg);
       },
     }),
-    getVideoById: builder.query<any, string>({
-      query: (id) => `/videos/single?video_id=${id}`,
+    getVideoById: builder.query<VideoData, string>({
+      query: (id) => `/videos?video_id=${id}`,
       transformErrorResponse: (
         val: FetchBaseQueryError,
         meta: FetchBaseQueryMeta | undefined,
@@ -70,9 +70,16 @@ export const videosApi = createApi({
         console.log(meta);
         console.log(arg);
       },
-      transformResponse: (res) => console.log(res)
-    })
+      transformResponse: (res: VideoData) => {
+        console.log(res);
+        return res;
+      },
+    }),
   }),
 });
 
-export const { useGetVideosByUserIdQuery, useUploadVideoMutation, useGetVideoByIdQuery } = videosApi;
+export const {
+  useGetVideosByUserIdQuery,
+  useUploadVideoMutation,
+  useGetVideoByIdQuery,
+} = videosApi;
