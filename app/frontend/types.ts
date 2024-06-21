@@ -6,9 +6,9 @@ export type Video = {
 }
 
 export type VideoData = {
-    userId: string;
+    user_id: string;
     description: string;
-    videoUrl: string;
+    video_url: string;
     title: string;
     id: string;
     created_at: string;
