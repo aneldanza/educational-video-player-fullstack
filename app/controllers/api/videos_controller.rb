@@ -1,6 +1,7 @@
-class Api::V1::VideosController < ApplicationController
+class Api::VideosController < ApplicationController
 
   def index
+    puts 'RECEIVED GET ALL VIDEOS REQUEST'
     response = get_all_user_videos_response(params[:user_id])
 
     if response.status == 200
@@ -30,9 +31,9 @@ class Api::V1::VideosController < ApplicationController
     end
   end
 
-  def get
+  def show
     puts 'RECEIVED GET VIDEO REQUEST'
-    @video_id = params[:video_id]
+    @video_id = params[:id]
 
     connection = Faraday.new(url: 'https://take-home-assessment-423502.uc.r.appspot.com/api')
 
