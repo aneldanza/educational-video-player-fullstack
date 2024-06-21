@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import ReactPlayer from "react-player";
 import moment from "moment";
 import { ChatBubbleLeftIcon } from "@heroicons/react/24/outline";
+import { Comments } from "./Comments";
 
 interface VideoProps {}
 
@@ -21,7 +22,12 @@ export const Video: React.FC<VideoProps> = () => {
     content = (
       <div className="w-full lg:w-1/2 h-full flex flex-col justify-items-center  font-body h-viewport ">
         <div className="p-2 lg:h-96 h-56">
-          <ReactPlayer url={data.video["video_url"]} controls={true} width="100%" height="100%" />
+          <ReactPlayer
+            url={data.video["video_url"]}
+            controls={true}
+            width="100%"
+            height="100%"
+          />
         </div>
         <div className="p-2 flex flex-col space-y-2">
           <div className="font-bold text-lg">{data.video.title}</div>
@@ -38,6 +44,11 @@ export const Video: React.FC<VideoProps> = () => {
           <div className="border border-gray-100 rounded-md mt-2 px-2 py-1 text-sm bg-gray-100">
             {data.video.description}
           </div>
+          {data.video["num_comments"] > 0 && (
+            <div className=" border border-gray-100 rounded-md px-2 px-1 text-sm bg-gray-100">
+              <Comments num={data.video["num_comments"]} />
+            </div>
+          )}
         </div>
       </div>
     );
