@@ -18,7 +18,7 @@ export const Video: React.FC<VideoProps> = () => {
   } else if (isSuccess) {
     const dateMoment = moment(data.video["created_at"]);
     content = (
-      <div className="flex flex-col justify-items-center">
+      <div className="flex flex-col justify-items-center  font-body ">
         <div className="w-full md:w-32 lg:w-56">
           <ReactPlayer
             url={data.video["video_url"]}
@@ -46,7 +46,6 @@ export const Video: React.FC<VideoProps> = () => {
 
   return (
     <>
-      <div>Single Video Page</div>
       {content}
     </>
   );
