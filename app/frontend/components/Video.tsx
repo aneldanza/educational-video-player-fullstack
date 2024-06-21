@@ -26,7 +26,7 @@ export const Video: React.FC<VideoProps> = () => {
             height="auto"
             controls={true}
           />
-          <div>
+          <div className="p-2">
             <div className="font-bold text-lg">{data.video.title}</div>
             <div className="flex space-x-3 text-sm">
               <div>{data.video["user_id"]}</div>
@@ -35,8 +35,12 @@ export const Video: React.FC<VideoProps> = () => {
       
               </div>
             </div>
+            <div>
+              <span className="text-xs">{`${data.video.num_comments} comments`}</span>
+            </div>
+            <div className="border border-gray-100 rounded-md mt-2 px-2 py-1 text-sm bg-gray-100">{data.video.description}</div>
           </div>
-          <div className="text-sm">{data.video.description}</div>
+         
         </div>
       </div>
     );
