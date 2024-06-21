@@ -11,6 +11,9 @@ export default defineConfig({
           100: '#096',
         },
       },
+      fontFamily: {
+        body: ["Outfit", "sans-serif"]
+      }
     },
   },
   plugins: [formsPlugin],
