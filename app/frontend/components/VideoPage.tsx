@@ -7,7 +7,7 @@ import { Comments } from "./Comments";
 
 interface VideoProps {}
 
-export const Video: React.FC<VideoProps> = () => {
+export const VideoPage: React.FC<VideoProps> = () => {
   const { videoId } = useParams();
   const { data, isLoading, isError, isSuccess, error } = useGetVideoByIdQuery(
     videoId || ""
