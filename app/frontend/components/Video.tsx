@@ -1,6 +1,7 @@
 import { useGetVideoByIdQuery } from "../app/createVideosApi";
 import { useParams } from "react-router-dom";
 import ReactPlayer from "react-player";
+import moment from 'moment'
 
 interface VideoProps {}
 
@@ -15,6 +16,7 @@ export const Video: React.FC<VideoProps> = () => {
   if (isLoading) {
     content = <div>Loading...</div>;
   } else if (isSuccess) {
+    const dateMoment = moment(data.video["created_at"]);
     content = (
       <div className="flex flex-col justify-items-center">
         <div className="w-full md:w-32 lg:w-56">
@@ -25,13 +27,16 @@ export const Video: React.FC<VideoProps> = () => {
             controls={true}
           />
           <div>
-            <div>{data.video.title}</div>
-            <div className="flex space-x-3">
+            <div className="font-bold text-lg">{data.video.title}</div>
+            <div className="flex space-x-3 text-sm">
               <div>{data.video["user_id"]}</div>
-              <div>{data.video["created_at"]}</div>
+              <div>
+                <span>{`Uploaded ${dateMoment.format("MMMM Do YYYY")}`}</span> 
+      
+              </div>
             </div>
           </div>
-          <div>{data.video.description}</div>
+          <div className="text-sm">{data.video.description}</div>
         </div>
       </div>
     );
