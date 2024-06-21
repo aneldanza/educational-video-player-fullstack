@@ -41,11 +41,11 @@ export const Video: React.FC<VideoProps> = () => {
             <ChatBubbleLeftIcon className="w-3 align-middle" />
             <span className="text-xs">{`${data.video.num_comments} comments`}</span>
           </div>
-          <div className="border border-gray-100 rounded-md mt-2 px-2 py-1 text-sm bg-gray-100">
+          <div className="border border-gray-100 rounded-md px-2 px-1 bg-gray-100 text-sm">
             {data.video.description}
           </div>
           {data.video["num_comments"] > 0 && (
-            <div className=" border border-gray-100 rounded-md px-2 px-1 text-sm bg-gray-100">
+            <div className="border border-gray-100 rounded-md px-2 px-1 bg-gray-100 text-sm lg:h-full lg:overflow-auto sm:h-40 sm:overflow-hidden">
               <Comments num={data.video["num_comments"]} />
             </div>
           )}
