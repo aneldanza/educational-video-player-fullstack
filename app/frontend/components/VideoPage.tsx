@@ -16,7 +16,7 @@ export const VideoPage: React.FC = () => {
   } else if (isSuccess) {
     content = (
       <div className="w-full lg:w-1/2 h-full flex flex-col justify-items-center  font-body h-viewport p-2 space-y-3 ">
-        <VideoCard video={data.video} />
+        <VideoCard video={data.video} light={false} />
 
         <div className="border border-gray-100 rounded-md px-2 px-1 bg-gray-100 text-sm">
           {data.video.description}

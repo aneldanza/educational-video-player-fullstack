@@ -2,7 +2,8 @@ import {
   useGetVideosByUserIdQuery,
   useUploadVideoMutation,
 } from "../app/createVideosApi";
-import { Link } from 'react-router-dom'
+import { Link } from "react-router-dom";
+import { VideoCard } from "./VideoCard";
 
 const userId = "anel_danza";
 
@@ -37,7 +38,6 @@ export function App() {
     }
   };
 
-
   let content;
 
   if (isLoading) {
@@ -46,7 +46,18 @@ export function App() {
     content = (
       <ul className={`flex-col divide-y divide-white `}>
         {data.videos.map((video, i) => {
-          return <li key={`video-${i}`}><Link to={`videos/${video.id}`} className="text-white">{video.title}</Link></li>;
+          return (
+            <li key={`video-${i}`}>
+              <Link
+                to={`videos/${video.id}`}
+                className="no-underline text-black"
+              >
+                <div hover:bg-teal>
+                  <VideoCard video={video} light={true} />
+                </div>
+              </Link>
+            </li>
+          );
         })}
       </ul>
     );
@@ -66,11 +77,7 @@ export function App() {
           Upload
         </button>
       </nav>
-      <main
-        className={`bg-slate-700 p-2 text-white ${"opacity-50" && isFetching}`}
-      >
-        {content}
-      </main>
+      <main className={`p-2 ${"opacity-50" && isFetching}`}>{content}</main>
     </div>
   );
 }

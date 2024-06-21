@@ -5,9 +5,10 @@ import { VideoData } from "../types";
 
 interface VideoCardProps {
   video: VideoData;
+  light: boolean
 }
 
-export const VideoCard: React.FC<VideoCardProps> = ({ video }) => {
+export const VideoCard: React.FC<VideoCardProps> = ({ video, light }) => {
   const dateMoment = moment(video["created_at"]);
   return (
     <>
@@ -17,6 +18,7 @@ export const VideoCard: React.FC<VideoCardProps> = ({ video }) => {
           controls={true}
           width="100%"
           height="100%"
+          light={light}
         />
       </div>
       <div className="font-bold text-lg">{video.title}</div>
