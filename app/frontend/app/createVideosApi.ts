@@ -5,7 +5,8 @@ import type {
 } from "@reduxjs/toolkit/query";
 import { Video, VideoData } from "../types";
 
-const baseUrl = "/api/v1";
+// const baseUrl = "/";
+const baseUrl = "/api";
 
 const baseQuery = fetchBaseQuery({
   baseUrl,
@@ -59,21 +60,8 @@ export const videosApi = createApi({
         console.log(arg);
       },
     }),
-    getVideoById: builder.query<VideoData, string>({
-      query: (id) => `/videos?video_id=${id}`,
-      transformErrorResponse: (
-        val: FetchBaseQueryError,
-        meta: FetchBaseQueryMeta | undefined,
-        arg: string
-      ) => {
-        console.log(val);
-        console.log(meta);
-        console.log(arg);
-      },
-      transformResponse: (res: VideoData) => {
-        console.log(res);
-        return res;
-      },
+    getVideoById: builder.query<{ video: VideoData }, string>({
+      query: (id) => `/videos/${id}`,
     }),
   }),
 });

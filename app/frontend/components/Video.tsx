@@ -15,7 +15,7 @@ export const Video: React.FC<VideoProps> = () => {
     content = <div>Loading...</div>;
   } else if (isSuccess) {
     content = (
-      <ul className={`flex-col divide-y divide-white `}>{data.title}</ul>
+      <ul className={`flex-col divide-y divide-white `}>{JSON.stringify(data, null, 2)}</ul>
     );
   } else if (isError) {
     content = <div>{error.toString()}</div>;
