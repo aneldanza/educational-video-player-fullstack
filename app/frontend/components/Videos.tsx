@@ -4,7 +4,7 @@ import { VideoCard } from "./VideoCard";
 
 interface VideosProps {
   videos: VideoData[];
-  style: string
+  style: string;
 }
 
 export const Videos: React.FC<VideosProps> = ({ videos, style }) => {
@@ -17,9 +17,11 @@ export const Videos: React.FC<VideosProps> = ({ videos, style }) => {
             to={`/videos/${video.id}`}
             className="no-underline text-black"
           >
-            <div className="">
-              <VideoCard video={video} light={true} style={'w-full h-56 lg:h-64 md:h-56 self-center'} />
-            </div>
+            <VideoCard
+              video={video}
+              light={true}
+              style={"w-full h-56 lg:h-64 md:h-56 self-center"}
+            />
           </Link>
         );
       })}

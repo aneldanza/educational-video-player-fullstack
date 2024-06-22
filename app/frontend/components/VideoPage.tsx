@@ -17,8 +17,8 @@ export const VideoPage: React.FC = () => {
   } else if (isSuccess) {
     content = (
       <div className="flex lg:flex-row lg:space-x-5 md:flex-row md:space-x-4 flex-col">
-        <div className="w-full lg:basis-2/3 md:basis-2/3 h-full flex flex-col justify-items-center  font-body h-viewport p-2 space-y-3 ">
-          <VideoCard video={data.video} light={false} style={'lg:h-120 md:h-120 h-56'} />
+        <div className="w-full lg:basis-2/3 md:basis-2/3 h-full flex flex-col justify-items-center  font-body h-viewport space-y-3 ">
+          <VideoCard video={data.video} light={false} style={'lg:h-130 md:h-96 h-56'} />
 
           <div className="border border-gray-100 rounded-md px-2 px-1 bg-gray-100 text-sm">
             {data.video.description}
@@ -30,7 +30,7 @@ export const VideoPage: React.FC = () => {
             </div>
           )}
         </div>
-        <div className="lg:w-500px pt-2 justify-self-center relative">
+        <div className="lg:w-500px justify-self-center">
           <VideosSideBar />
         </div>
       </div>

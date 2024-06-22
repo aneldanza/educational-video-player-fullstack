@@ -8,7 +8,7 @@ console.log(imagePaths)
 export const Layout = () => {
   
   return (
-    <div className="p-5">
+    <div className="lg:p-5 p-2">
       <NavBar />
       <div><Outlet /></div>
     </div>

@@ -17,6 +17,6 @@ export const VideosSideBar = () => {
   }
 
   return (
-    <main className={`${"opacity-50" && isFetching} flex-col overflow-auto`}>{content}</main>
+    <main className={`${"opacity-50" && isFetching} flex-col max-h-screen sticky top-0 h-screen overflow-y-auto`}>{content}</main>
   );
 };
