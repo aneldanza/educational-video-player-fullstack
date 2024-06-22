@@ -8,9 +8,7 @@ export default defineConfig({
   theme: {
     extend: {
       colors: {
-        teal: {
-          100: '#096',
-        },
+        carribean: "#00B6EF",
       },
       fontFamily: {
         body: ["Outfit", "sans-serif"]
