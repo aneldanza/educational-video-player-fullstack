@@ -30,9 +30,9 @@ export const FormInput: React.FC<FormInputProps> = ({
         value={value}
         onChange={(e) => {
           handleChange(e);
-          setFocused(true);
         }}
         onBlur={() => setFocused(false)}
+        onFocus={() => setFocused(true)}
         className="outline-transparent w-full"
         placeholder={placeholder}
       />
