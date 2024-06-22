@@ -28,10 +28,6 @@ export const NewComment: React.FC<NewCommentProps> = ({ videoId }) => {
 
   const initialValues: { comment: string } = { comment: "" };
 
-  const handleInputHighlight = () => {
-    setFocused(true);
-  };
-
   const handleComment = async (content: string) => {
     const userId = uniqueNamesGenerator(customConfig);
     const payload: { token: string; comment: CreateComment } = {
@@ -55,7 +51,6 @@ export const NewComment: React.FC<NewCommentProps> = ({ videoId }) => {
       <Formik
         initialValues={initialValues}
         onSubmit={(values, actions) => {
-          console.log({ values, actions });
           handleComment(values.comment);
           actions.resetForm();
           actions.setSubmitting(false);
@@ -76,7 +71,7 @@ export const NewComment: React.FC<NewCommentProps> = ({ videoId }) => {
                 value={props.values.comment}
                 onChange={(e) => {
                   props.handleChange(e);
-                  handleInputHighlight();
+                  setFocused(true);
                 }}
                 className="outline-transparent w-full"
               />
