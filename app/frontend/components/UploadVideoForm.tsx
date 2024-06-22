@@ -42,7 +42,7 @@ export const UploadVideoForm:React.FC<UploadVideoFormProps> = ({closeModal}) => 
   };
 
   return (
-    <div>
+    <div className="p-4">
       <div className="text-xl font-bold mb-4">Upload Video</div>
       <Formik
         initialValues={initialValues}

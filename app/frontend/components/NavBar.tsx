@@ -4,24 +4,24 @@ import { Link } from "react-router-dom";
 import Modal from "react-modal";
 import { UploadVideoForm } from "./UploadVideoForm";
 
-const customStyles = {
-  content: {
-    top: "50%",
-    left: "50%",
-    right: "auto",
-    bottom: "auto",
-    marginRight: "-50%",
-    transform: "translate(-50%, -50%)",
-    width: "50%",
-    borderRadius: "40px"
-  },
-};
+// const customStyles = {
+//   content: {
+//     top: "50%",
+//     left: "50%",
+//     right: "auto",
+//     bottom: "auto",
+//     marginRight: "-50%",
+//     transform: "translate(-50%, -50%)",
+//     width: "50%",
+//     borderRadius: "40px",
+//   },
+// };
 
 Modal.setAppElement("#root");
 
 export const NavBar = () => {
   const { data, isError, isSuccess, error } = useGetImagePathsQuery("");
-  const [modalIsOpen, setIsOpen] = useState(false);
+  const [modalIsOpen, setIsOpen] = useState(true);
 
   function openModal() {
     setIsOpen(true);
@@ -59,7 +59,7 @@ export const NavBar = () => {
         isOpen={modalIsOpen}
         onAfterOpen={afterOpenModal}
         onRequestClose={closeModal}
-        style={customStyles}
+        className="modal-custom"
         contentLabel="Upload Video Modal"
       >
         <UploadVideoForm closeModal={closeModal} />
