@@ -59,4 +59,17 @@ class Api::VideosController < ApplicationController
 
     return response
   end 
+
+  def get_image_paths
+    @images = {
+        logoColor: path_to_asset('logo_color.png'),
+        iconColor: path_to_asset('logo_icon.png')
+      }
+
+    render json: @images
+  end
+
+  def path_to_asset(asset)
+      ApplicationController.helpers.asset_path(asset)
+  end
 end
