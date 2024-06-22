@@ -2,13 +2,41 @@ import {
   useUploadVideoMutation,
   useGetImagePathsQuery,
 } from "../app/createVideosApi";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { csrfToken } from "../utils";
+import Modal from "react-modal";
+
+const customStyles = {
+  content: {
+    top: "50%",
+    left: "50%",
+    right: "auto",
+    bottom: "auto",
+    marginRight: "-50%",
+    transform: "translate(-50%, -50%)",
+  },
+};
+
+// Make sure to bind modal to your appElement (https://reactcommunity.org/react-modal/accessibility/)
+Modal.setAppElement("#root");
 
 export const NavBar = () => {
   const [uploadVideo] = useUploadVideoMutation();
   const { data, isError, isSuccess, error } = useGetImagePathsQuery("");
-  // const canSave = [title, content, userId].every(Boolean)
+  const [modalIsOpen, setIsOpen] = useState(false);
+
+  function openModal() {
+    setIsOpen(true);
+  }
+
+  function afterOpenModal() {
+    // references are now sync'd and can be accessed.
+  }
+
+  function closeModal() {
+    setIsOpen(false);
+  }
 
   if (isError) {
     console.log(error);
@@ -43,9 +71,17 @@ export const NavBar = () => {
         <img src={data && data.logoColor} className="w-56" />
       </Link>
 
-      <div className="primary-btn" onClick={uploadNewVideo}>
+      <div className="primary-btn" onClick={openModal}>
         Upload
       </div>
+
+      <Modal
+        isOpen={modalIsOpen}
+        onAfterOpen={afterOpenModal}
+        onRequestClose={closeModal}
+        style={customStyles}
+        contentLabel="Example Modal"
+      >Upload New Video</Modal>
     </nav>
   );
 };
