@@ -6,6 +6,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { csrfToken } from "../utils";
 import Modal from "react-modal";
+import { UploadVideoForm } from "./UploadVideoForm";
 
 const customStyles = {
   content: {
@@ -44,23 +45,6 @@ export const NavBar = () => {
     console.log(data);
   }
 
-  const uploadNewVideo = async () => {
-    const video = {
-      title: "One Earth",
-      description: "Environmental Short Film",
-      video_url: "https://youtu.be/QQYgCxu988s?si=4RcBhqzxE6jclaLW",
-      user_id: "anel_danza",
-    };
-
-    const token = csrfToken();
-
-    try {
-      await uploadVideo({ video, token }).unwrap();
-    } catch (e) {
-      console.error("failed to upload a video");
-    }
-  };
-
   return (
     <nav className="flex justify-between mb-5 font-body">
       <div className="border border-black rounded-2xl px-5 self-center">
@@ -81,7 +65,9 @@ export const NavBar = () => {
         onRequestClose={closeModal}
         style={customStyles}
         contentLabel="Example Modal"
-      >Upload New Video</Modal>
+      >
+        <UploadVideoForm />
+      </Modal>
     </nav>
   );
 };

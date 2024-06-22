@@ -48,13 +48,26 @@ export const UploadVideoForm = () => {
           <Form>
             <FormInput
               icon={<LinkIcon className="w-5 mr-2" />}
+              value={props.values.title}
+              name={"title"}
+              handleChange={props.handleChange}
+              placeholder="Title your video"
+            />
+            <FormInput
+              icon={<LinkIcon className="w-5 mr-2" />}
+              value={props.values.description}
+              name={"description"}
+              handleChange={props.handleChange}
+              placeholder="Add description"
+            />
+            <FormInput
+              icon={<LinkIcon className="w-5 mr-2" />}
               value={props.values.url}
               name={"url"}
               handleChange={props.handleChange}
+              placeholder="https://www.your-video-link.com"
             />
-            {/* <Field id="title" name="title" className="form-input"/>
-            <Field id="description" name="description" className="form-input"/>
-            <Field id="url" name="url" className="form-input"/> */}
+
             <div className="flex space-x-4">
               <button className="secondary-btn">Cancel</button>
               <button className="primary-btn" type="submit">
