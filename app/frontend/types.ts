@@ -21,4 +21,10 @@ export type CreateComment = {
   user_id: string;
 };
 
-export type CommentData = {};
+export type CommentData = {
+  user_id: string;
+  created_at: string;
+  content: string;
+  video_id: string;
+  id: string;
+};
