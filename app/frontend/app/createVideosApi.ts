@@ -3,7 +3,7 @@ import type {
   FetchBaseQueryMeta,
   FetchBaseQueryError,
 } from "@reduxjs/toolkit/query";
-import { Video, VideoData, CreateComment } from "../types";
+import { Video, VideoData, CreateComment, CommentData } from "../types";
 
 // const baseUrl = "/";
 const baseUrl = "/api";
@@ -16,7 +16,7 @@ const baseQuery = fetchBaseQuery({
 export const videosApi = createApi({
   reducerPath: "videosApi",
   baseQuery: baseQuery,
-  tagTypes: ["Video", "Comment"],
+  tagTypes: ["Video", "Comment", "Videos"],
   endpoints: (builder) => ({
     getVideosByUserId: builder.query<{ videos: VideoData[] }, string>({
       query: (userId) => {
@@ -25,7 +25,7 @@ export const videosApi = createApi({
           params: { user_id: userId },
         };
       },
-      providesTags: ["Video"],
+      providesTags: ["Videos"],
       transformErrorResponse: (
         val: FetchBaseQueryError,
         meta: FetchBaseQueryMeta | undefined,
@@ -49,7 +49,7 @@ export const videosApi = createApi({
           },
         };
       },
-      invalidatesTags: ["Video"],
+      invalidatesTags: ["Videos"],
       transformErrorResponse: (
         val: FetchBaseQueryError,
         meta: FetchBaseQueryMeta | undefined,
@@ -62,11 +62,12 @@ export const videosApi = createApi({
     }),
     getVideoById: builder.query<{ video: VideoData }, string>({
       query: (id) => `/videos/${id}`,
+      providesTags: ["Video"]
     }),
     getImagePaths: builder.query({
       query: () => '/videos/get_image_paths'
     }),
-    getCommentsByVideoId: builder.query<{comments: any}, string>({
+    getCommentsByVideoId: builder.query<{comments: CommentData[]}, string>({
       query: (videoId) => `comments?video_id=${videoId}`,
       providesTags: ['Comment']
     }),
@@ -83,7 +84,7 @@ export const videosApi = createApi({
           },
         };
       }, 
-      invalidatesTags: ["Comment"]
+      invalidatesTags: ["Comment", "Video"]
     })
   }),
 });
