@@ -36,7 +36,7 @@ export function App() {
 
   return (
     <div className="flex-col">
-      <main className={`p-2 ${"opacity-50" && isFetching}`}>{content}</main>
+      <main className={`${"opacity-50" && isFetching}`}>{content}</main>
     </div>
   );
 }

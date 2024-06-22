@@ -39,17 +39,19 @@ export const NavBar = () => {
   };
 
   return (
-    <nav className="flex justify-between mb-5">
-      <div className="border border-black rounded-2xl px-5 self-center">search bar</div>
-      <div>
-        <img src={data && data.logoColor} className="w-64"/>
+    <nav className="flex justify-between mb-5 font-body">
+      <div className="border border-black rounded-2xl px-5 self-center">
+        search bar
       </div>
-      <button
-        className="border border-black rounded-xl px-2 cursor-pointer self-center"
+
+      <img src={data && data.logoColor} className="w-56" />
+
+      <div
+        className="border border-carribean text-white rounded-3xl py-2 px-6 cursor-pointer self-center bg-carribean"
         onClick={uploadNewVideo}
       >
         Upload
-      </button>
+      </div>
     </nav>
   );
 };
