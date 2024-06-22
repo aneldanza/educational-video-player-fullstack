@@ -1,42 +1,12 @@
-import {
-  useGetVideosByUserIdQuery,
-  useUploadVideoMutation,
-} from "../app/createVideosApi";
+import { useGetVideosByUserIdQuery } from "../app/createVideosApi";
 import { Link } from "react-router-dom";
 import { VideoCard } from "./VideoCard";
 
 const userId = "anel_danza";
 
-function csrfToken() {
-  const meta = document.querySelector("meta[name=csrf-token]");
-  const token = meta && meta.getAttribute("content");
-
-  return token ?? "";
-}
-
 export function App() {
   const { data, error, isLoading, isError, isSuccess, isFetching } =
     useGetVideosByUserIdQuery(userId);
-  const [uploadVideo] = useUploadVideoMutation();
-
-  // const canSave = [title, content, userId].every(Boolean)
-
-  const uploadNewVideo = async () => {
-    const video = {
-      title: "One Earth",
-      description: "Environmental Short Film",
-      video_url: "https://youtu.be/QQYgCxu988s?si=4RcBhqzxE6jclaLW",
-      user_id: "anel_danza",
-    };
-
-    const token = csrfToken();
-
-    try {
-      await uploadVideo({ video, csrfToken: token }).unwrap();
-    } catch (e) {
-      console.error("failed to upload a video");
-    }
-  };
 
   let content;
 
@@ -44,22 +14,21 @@ export function App() {
     content = <div>Loading...</div>;
   } else if (isSuccess) {
     content = (
-      <ul className={`flex-col divide-y divide-white `}>
+      <div className={`grid grid-cols-1 gap-4 lg:grid-cols-3`}>
         {data.videos.map((video, i) => {
           return (
-            <li key={`video-${i}`}>
-              <Link
-                to={`videos/${video.id}`}
-                className="no-underline text-black"
-              >
-                <div hover:bg-teal>
-                  <VideoCard video={video} light={true} />
-                </div>
-              </Link>
-            </li>
+            <Link
+              key={`video-${i}`}
+              to={`videos/${video.id}`}
+              className="no-underline text-black"
+            >
+              <div className="">
+                <VideoCard video={video} light={true} />
+              </div>
+            </Link>
           );
         })}
-      </ul>
+      </div>
     );
   } else if (isError) {
     content = <div>{error.toString()}</div>;
@@ -67,16 +36,6 @@ export function App() {
 
   return (
     <div className="flex-col">
-      <nav className="flex bg-slate-200 p-2 justify-between">
-        <div>Logo</div>
-        <div className="border border-black rounded-2xl px-5">search bar</div>
-        <button
-          className="border border-black rounded-xl px-2 cursor-pointer"
-          onClick={uploadNewVideo}
-        >
-          Upload
-        </button>
-      </nav>
       <main className={`p-2 ${"opacity-50" && isFetching}`}>{content}</main>
     </div>
   );

@@ -1,11 +1,11 @@
 import { ChatBubbleLeftIcon } from "@heroicons/react/24/outline";
 import moment from "moment";
-import ReactPlayer from 'react-player'
+import ReactPlayer from "react-player";
 import { VideoData } from "../types";
 
 interface VideoCardProps {
   video: VideoData;
-  light: boolean
+  light: boolean;
 }
 
 export const VideoCard: React.FC<VideoCardProps> = ({ video, light }) => {
