@@ -22,7 +22,6 @@ export const FormInput: React.FC<FormInputProps> = ({
         focused ? "border-black" : "border-gray-300"
       }`}
     >
-      {/* <ChatBubbleLeftEllipsisIcon className="w-5 mr-2" /> */}
       {icon}
       <input
         type="text"
@@ -33,6 +32,7 @@ export const FormInput: React.FC<FormInputProps> = ({
           handleChange(e);
           setFocused(true);
         }}
+        onBlur={() => setFocused(false)}
         className="outline-transparent w-full"
         placeholder={placeholder}
       />
