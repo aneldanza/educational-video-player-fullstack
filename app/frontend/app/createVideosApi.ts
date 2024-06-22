@@ -63,6 +63,9 @@ export const videosApi = createApi({
     getVideoById: builder.query<{ video: VideoData }, string>({
       query: (id) => `/videos/${id}`,
     }),
+    getImagePaths: builder.query({
+      query: () => '/videos/get_image_paths'
+    })
   }),
 });
 
@@ -70,4 +73,5 @@ export const {
   useGetVideosByUserIdQuery,
   useUploadVideoMutation,
   useGetVideoByIdQuery,
+  useGetImagePathsQuery
 } = videosApi;
