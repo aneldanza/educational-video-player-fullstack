@@ -1,10 +1,18 @@
 import { Formik, Form } from "formik";
-import { LinkIcon } from "@heroicons/react/24/outline";
+import {
+  LinkIcon,
+  TagIcon,
+  ChatBubbleLeftEllipsisIcon,
+} from "@heroicons/react/24/outline";
 import { csrfToken } from "../utils";
 import { useUploadVideoMutation } from "../app/createVideosApi";
 import { FormInput } from "./FormInput";
 
-export const UploadVideoForm = () => {
+interface UploadVideoFormProps {
+  closeModal: () => void;
+}
+
+export const UploadVideoForm:React.FC<UploadVideoFormProps> = ({closeModal}) => {
   const [uploadVideo] = useUploadVideoMutation();
   const initialValues = {
     title: "",
@@ -35,26 +43,27 @@ export const UploadVideoForm = () => {
 
   return (
     <div>
-      <div>Upload Video</div>
+      <div className="text-xl font-bold mb-4">Upload Video</div>
       <Formik
         initialValues={initialValues}
         onSubmit={(values, actions) => {
           uploadNewVideo(values);
           actions.resetForm();
           actions.setSubmitting(false);
+          closeModal()
         }}
       >
         {(props) => (
-          <Form>
+          <Form className="flex flex-col space-y-4">
             <FormInput
-              icon={<LinkIcon className="w-5 mr-2" />}
+              icon={<TagIcon className="w-5 mr-2" />}
               value={props.values.title}
               name={"title"}
               handleChange={props.handleChange}
               placeholder="Title your video"
             />
             <FormInput
-              icon={<LinkIcon className="w-5 mr-2" />}
+              icon={<ChatBubbleLeftEllipsisIcon className="w-5 mr-2" />}
               value={props.values.description}
               name={"description"}
               handleChange={props.handleChange}
@@ -68,8 +77,10 @@ export const UploadVideoForm = () => {
               placeholder="https://www.your-video-link.com"
             />
 
-            <div className="flex space-x-4">
-              <button className="secondary-btn">Cancel</button>
+            <div className="flex space-x-4 justify-end">
+              <button type="reset" className="secondary-btn">
+                Cancel
+              </button>
               <button className="primary-btn" type="submit">
                 Upload
               </button>

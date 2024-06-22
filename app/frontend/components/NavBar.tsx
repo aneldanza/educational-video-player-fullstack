@@ -21,7 +21,7 @@ Modal.setAppElement("#root");
 
 export const NavBar = () => {
   const { data, isError, isSuccess, error } = useGetImagePathsQuery("");
-  const [modalIsOpen, setIsOpen] = useState(true);
+  const [modalIsOpen, setIsOpen] = useState(false);
 
   function openModal() {
     setIsOpen(true);
@@ -60,9 +60,9 @@ export const NavBar = () => {
         onAfterOpen={afterOpenModal}
         onRequestClose={closeModal}
         style={customStyles}
-        contentLabel="Example Modal"
+        contentLabel="Upload Video Modal"
       >
-        <UploadVideoForm />
+        <UploadVideoForm closeModal={closeModal} />
       </Modal>
     </nav>
   );
