@@ -1,4 +1,7 @@
-import { useUploadVideoMutation } from "../app/createVideosApi";
+import {
+  useUploadVideoMutation,
+  useGetImagePathsQuery,
+} from "../app/createVideosApi";
 
 function csrfToken() {
   const meta = document.querySelector("meta[name=csrf-token]");
@@ -9,8 +12,14 @@ function csrfToken() {
 
 export const NavBar = () => {
   const [uploadVideo] = useUploadVideoMutation();
-
+  const { data, isError, isSuccess, error } = useGetImagePathsQuery("");
   // const canSave = [title, content, userId].every(Boolean)
+
+  if (isError) {
+    console.log(error);
+  } else if (isSuccess) {
+    console.log(data);
+  }
 
   const uploadNewVideo = async () => {
     const video = {
@@ -30,11 +39,13 @@ export const NavBar = () => {
   };
 
   return (
-    <nav className="flex bg-slate-200 p-2 justify-between">
-      <div>Logo</div>
-      <div className="border border-black rounded-2xl px-5">search bar</div>
+    <nav className="flex justify-between mb-5">
+      <div className="border border-black rounded-2xl px-5 self-center">search bar</div>
+      <div>
+        <img src={data && data.logoColor} className="w-64"/>
+      </div>
       <button
-        className="border border-black rounded-xl px-2 cursor-pointer"
+        className="border border-black rounded-xl px-2 cursor-pointer self-center"
         onClick={uploadNewVideo}
       >
         Upload
