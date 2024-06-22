@@ -3,7 +3,7 @@ import type {
   FetchBaseQueryMeta,
   FetchBaseQueryError,
 } from "@reduxjs/toolkit/query";
-import { Video, VideoData } from "../types";
+import { Video, VideoData, CreateComment } from "../types";
 
 // const baseUrl = "/";
 const baseUrl = "/api";
@@ -16,7 +16,7 @@ const baseQuery = fetchBaseQuery({
 export const videosApi = createApi({
   reducerPath: "videosApi",
   baseQuery: baseQuery,
-  tagTypes: ["Video"],
+  tagTypes: ["Video", "Comment"],
   endpoints: (builder) => ({
     getVideosByUserId: builder.query<{ videos: VideoData[] }, string>({
       query: (userId) => {
@@ -36,7 +36,7 @@ export const videosApi = createApi({
         console.log(arg);
       },
     }),
-    uploadVideo: builder.mutation<any, { video: Video; csrfToken: string }>({
+    uploadVideo: builder.mutation<any, { video: Video; token: string }>({
       query: (payload) => {
         return {
           url: "videos",
@@ -45,7 +45,7 @@ export const videosApi = createApi({
           headers: {
             "Content-Type": "application/json",
             Accept: "application/json",
-            "X-CSRF-Token": payload.csrfToken,
+            "X-CSRF-Token": payload.token,
           },
         };
       },
@@ -67,7 +67,23 @@ export const videosApi = createApi({
       query: () => '/videos/get_image_paths'
     }),
     getCommentsByVideoId: builder.query<{comments: any}, string>({
-      query: (videoId) => `comments?video_id=${videoId}`
+      query: (videoId) => `comments?video_id=${videoId}`,
+      providesTags: ['Comment']
+    }),
+    createComment: builder.mutation<any, {comment: CreateComment; token: string}>({
+      query: (payload) => {
+        return {
+          url: "comments",
+          method: "post",
+          body: JSON.stringify(payload.comment),
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            "X-CSRF-Token": payload.token,
+          },
+        };
+      }, 
+      invalidatesTags: ["Comment"]
     })
   }),
 });
@@ -77,5 +93,6 @@ export const {
   useUploadVideoMutation,
   useGetVideoByIdQuery,
   useGetImagePathsQuery,
-  useGetCommentsByVideoIdQuery
+  useGetCommentsByVideoIdQuery,
+  useCreateCommentMutation
 } = videosApi;
