@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  # namespace :api do
+  #   get 'comment/index'
+  #   get 'comment/show'
+  #   get 'comment/create'
+  # end
   # get 'homepage/index'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -12,6 +17,7 @@ Rails.application.routes.draw do
   namespace :api, defaults: {format: :json} do
       get '/videos/get_image_paths', to: 'videos#get_image_paths'
       resources :videos, only: [:index, :create, :show]
+      resources :comments, only: [:index, :create, :show]
 
   end
 
