@@ -3,13 +3,7 @@ import {
   useGetImagePathsQuery,
 } from "../app/createVideosApi";
 import { Link } from "react-router-dom";
-
-function csrfToken() {
-  const meta = document.querySelector("meta[name=csrf-token]");
-  const token = meta && meta.getAttribute("content");
-
-  return token ?? "";
-}
+import { csrfToken } from "../utils";
 
 export const NavBar = () => {
   const [uploadVideo] = useUploadVideoMutation();
@@ -33,7 +27,7 @@ export const NavBar = () => {
     const token = csrfToken();
 
     try {
-      await uploadVideo({ video, csrfToken: token }).unwrap();
+      await uploadVideo({ video, token }).unwrap();
     } catch (e) {
       console.error("failed to upload a video");
     }
@@ -45,12 +39,11 @@ export const NavBar = () => {
         search bar
       </div>
 
-      <Link to={'/'}><img src={data && data.logoColor} className="w-56" /></Link>
+      <Link to={"/"}>
+        <img src={data && data.logoColor} className="w-56" />
+      </Link>
 
-      <div
-        className="border border-carribean text-white rounded-3xl py-2 px-6 cursor-pointer self-center bg-carribean"
-        onClick={uploadNewVideo}
-      >
+      <div className="primary-btn" onClick={uploadNewVideo}>
         Upload
       </div>
     </nav>

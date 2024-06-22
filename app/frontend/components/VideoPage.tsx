@@ -1,8 +1,8 @@
 import { useGetVideoByIdQuery } from "../app/createVideosApi";
 import { useParams } from "react-router-dom";
-import { Comments } from "./Comments";
 import { VideoCard } from "./VideoCard";
 import { VideosSideBar } from "./VideosSideBar";
+import { CommentsContainer } from "./CommentsContainer";
 
 export const VideoPage: React.FC = () => {
   const { videoId } = useParams();
@@ -24,11 +24,7 @@ export const VideoPage: React.FC = () => {
             {data.video.description}
           </div>
 
-          {data.video["num_comments"] > 0 && (
-            <div className="border border-gray-100 rounded-md px-2 px-1 bg-gray-100 text-sm lg:h-full lg:overflow-auto sm:h-40 sm:overflow-hidden">
-              <Comments num={data.video["num_comments"]} />
-            </div>
-          )}
+          <CommentsContainer num={data.video["num_comments"]} />
         </div>
         <div className="lg:w-500px justify-self-center">
           <VideosSideBar />

@@ -22,7 +22,7 @@ export const VideoCard: React.FC<VideoCardProps> = ({ video, light, style }) => 
           light={light}
         />
       </div>
-      <div className="font-bold text-lg">{video.title}</div>
+      <div className="font-bold text-xl">{video.title}</div>
       <div className="flex space-x-3 text-sm">
         <div>{video["user_id"]}</div>
         <div>
