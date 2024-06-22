@@ -6,13 +6,14 @@ import { VideoData } from "../types";
 interface VideoCardProps {
   video: VideoData;
   light: boolean;
+  style: string;
 }
 
-export const VideoCard: React.FC<VideoCardProps> = ({ video, light }) => {
+export const VideoCard: React.FC<VideoCardProps> = ({ video, light, style }) => {
   const dateMoment = moment(video["created_at"]);
   return (
     <>
-      <div className="lg:h-96 h-56">
+      <div className={style}>
         <ReactPlayer
           url={video["video_url"]}
           controls={true}
