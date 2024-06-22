@@ -65,6 +65,9 @@ export const videosApi = createApi({
     }),
     getImagePaths: builder.query({
       query: () => '/videos/get_image_paths'
+    }),
+    getCommentsByVideoId: builder.query<{comments: any}, string>({
+      query: (videoId) => `comments?video_id=${videoId}`
     })
   }),
 });
@@ -73,5 +76,6 @@ export const {
   useGetVideosByUserIdQuery,
   useUploadVideoMutation,
   useGetVideoByIdQuery,
-  useGetImagePathsQuery
+  useGetImagePathsQuery,
+  useGetCommentsByVideoIdQuery
 } = videosApi;
