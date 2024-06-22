@@ -10,7 +10,9 @@ Rails.application.routes.draw do
   root "homepage#index"
 
   namespace :api, defaults: {format: :json} do
+      get '/videos/get_image_paths', to: 'videos#get_image_paths'
       resources :videos, only: [:index, :create, :show]
+
   end
 
   match '*path', to: 'homepage#index', via: :get

@@ -1,5 +1,6 @@
 import { defineConfig } from 'windicss/helpers'
-import formsPlugin from 'windicss/plugin/forms'
+import plugin from 'windicss/plugin'
+
 
 export default defineConfig({
   darkMode: 'class',
@@ -7,16 +8,15 @@ export default defineConfig({
   theme: {
     extend: {
       colors: {
-        teal: {
-          100: '#096',
-        },
+        carribean: "#00B6EF",
       },
       fontFamily: {
         body: ["Outfit", "sans-serif"]
       }
     },
   },
-  plugins: [formsPlugin],
+  plugins: [
+  ],
   extract: {
     include: [
         './app/frontend/**/*.{js,ts,jsx,tsx}',
