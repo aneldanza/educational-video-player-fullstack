@@ -7,9 +7,9 @@ import {
 } from "unique-names-generator";
 import { Formik, Form } from "formik";
 import { useCreateCommentMutation } from "../app/createVideosApi";
-import { useState } from "react";
 import { csrfToken } from "../utils";
 import { CreateComment } from "../types";
+import { FormInput } from "./FormInput";
 
 interface NewCommentProps {
   videoId: string;
@@ -22,8 +22,6 @@ const customConfig: Config = {
 };
 
 export const NewComment: React.FC<NewCommentProps> = ({ videoId }) => {
-  const [focused, setFocused] = useState<boolean>(false);
-
   const [createComment] = useCreateCommentMutation();
 
   const initialValues: { comment: string } = { comment: "" };
@@ -58,24 +56,13 @@ export const NewComment: React.FC<NewCommentProps> = ({ videoId }) => {
       >
         {(props) => (
           <Form className="flex flex-row space-x-4">
-            <div
-              className={`w-full border px-4 p-2 rounded-3xl self-center flex ${
-                focused ? "border-black" : "border-gray-300"
-              }`}
-            >
-              <ChatBubbleLeftEllipsisIcon className="w-5 mr-2" />
-              <input
-                type="text"
-                id="comment"
-                name="comment"
-                value={props.values.comment}
-                onChange={(e) => {
-                  props.handleChange(e);
-                  setFocused(true);
-                }}
-                className="outline-transparent w-full"
-              />
-            </div>
+            <FormInput
+              value={props.values.comment}
+              name={"comment"}
+              icon={<ChatBubbleLeftEllipsisIcon className="w-5 mr-2" />}
+              handleChange={props.handleChange}
+            />
+
             <button type="submit" className="primary-btn">
               Comment
             </button>

@@ -1,37 +1,45 @@
-import {
-  useUploadVideoMutation,
-  useGetImagePathsQuery,
-} from "../app/createVideosApi";
+import { useGetImagePathsQuery } from "../app/createVideosApi";
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import { csrfToken } from "../utils";
+import Modal from "react-modal";
+import { UploadVideoForm } from "./UploadVideoForm";
+
+// const customStyles = {
+//   content: {
+//     top: "50%",
+//     left: "50%",
+//     right: "auto",
+//     bottom: "auto",
+//     marginRight: "-50%",
+//     transform: "translate(-50%, -50%)",
+//     width: "50%",
+//     borderRadius: "40px",
+//   },
+// };
+
+Modal.setAppElement("#root");
 
 export const NavBar = () => {
-  const [uploadVideo] = useUploadVideoMutation();
   const { data, isError, isSuccess, error } = useGetImagePathsQuery("");
-  // const canSave = [title, content, userId].every(Boolean)
+  const [modalIsOpen, setIsOpen] = useState(true);
+
+  function openModal() {
+    setIsOpen(true);
+  }
+
+  function afterOpenModal() {
+    // references are now sync'd and can be accessed.
+  }
+
+  function closeModal() {
+    setIsOpen(false);
+  }
 
   if (isError) {
     console.log(error);
   } else if (isSuccess) {
     console.log(data);
   }
-
-  const uploadNewVideo = async () => {
-    const video = {
-      title: "One Earth",
-      description: "Environmental Short Film",
-      video_url: "https://youtu.be/QQYgCxu988s?si=4RcBhqzxE6jclaLW",
-      user_id: "anel_danza",
-    };
-
-    const token = csrfToken();
-
-    try {
-      await uploadVideo({ video, token }).unwrap();
-    } catch (e) {
-      console.error("failed to upload a video");
-    }
-  };
 
   return (
     <nav className="flex justify-between mb-5 font-body">
@@ -43,9 +51,19 @@ export const NavBar = () => {
         <img src={data && data.logoColor} className="w-56" />
       </Link>
 
-      <div className="primary-btn" onClick={uploadNewVideo}>
+      <div className="primary-btn" onClick={openModal}>
         Upload
       </div>
+
+      <Modal
+        isOpen={modalIsOpen}
+        onAfterOpen={afterOpenModal}
+        onRequestClose={closeModal}
+        className="modal-custom"
+        contentLabel="Upload Video Modal"
+      >
+        <UploadVideoForm closeModal={closeModal} />
+      </Modal>
     </nav>
   );
 };
