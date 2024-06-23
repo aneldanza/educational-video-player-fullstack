@@ -2,25 +2,29 @@ import Select, { components } from "react-select";
 import { useGetVideosByUserIdQuery } from "../app/createVideosApi";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 
-// type VideoOption = {
-//   label: string;
-//   value: string;
-// };
+type VideoOption = {
+  label: string;
+  value: string;
+};
 
 const userId = "anel_danza";
 
 const customStyles = {
-    control: (base: any) => ({
-      ...base,
-      flexDirection: 'row-reverse',
-      minWidth: '300px',
-    }),
-    clearIndicator: (base: any) => ({
-        ...base,
-        position: 'absolute',
-        right: 0
-    })
-  }
+  control: (base: any) => ({
+    ...base,
+    flexDirection: "row-reverse",
+    minWidth: "300px",
+  }),
+  clearIndicator: (base: any) => ({
+    ...base,
+    position: "absolute",
+    right: 0,
+  }),
+  valueContainer: (base: any) => ({
+    ...base,
+    paddingRight: "2.3rem",
+  }),
+};
 
 const DropdownIndicator = (props: any) => {
   return (
@@ -29,6 +33,16 @@ const DropdownIndicator = (props: any) => {
         <MagnifyingGlassIcon className="w-3" />
       </components.DropdownIndicator>
     )
+  );
+};
+
+const OptionLabel = (option: VideoOption) => {
+  return (
+    <div className="flex">
+      <div className="grow overflow-ellipsis whitespace-nowrap overflow-hidden">
+        {option.label}
+      </div>
+    </div>
   );
 };
 
@@ -52,6 +66,7 @@ export const SearchBar: React.FC = () => {
           DropdownIndicator,
         }}
         styles={customStyles}
+        formatOptionLabel={OptionLabel}
       />
     </div>
   );
