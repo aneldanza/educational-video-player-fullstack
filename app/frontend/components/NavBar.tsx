@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import Modal from "react-modal";
 import { UploadVideoForm } from "./UploadVideoForm";
+import { SearchBar } from "./SearchBar";
 
 // const customStyles = {
 //   content: {
@@ -21,7 +22,7 @@ Modal.setAppElement("#root");
 
 export const NavBar = () => {
   const { data, isError, isSuccess, error } = useGetImagePathsQuery("");
-  const [modalIsOpen, setIsOpen] = useState(true);
+  const [modalIsOpen, setIsOpen] = useState(false);
 
   function openModal() {
     setIsOpen(true);
@@ -43,9 +44,7 @@ export const NavBar = () => {
 
   return (
     <nav className="flex justify-between mb-5 font-body">
-      <div className="border border-black rounded-2xl px-5 self-center">
-        search bar
-      </div>
+      <SearchBar />
 
       <Link to={"/"}>
         <img src={data && data.logoColor} className="w-56" />
