@@ -43,14 +43,14 @@ export const NavBar = () => {
   }
 
   return (
-    <nav className="flex justify-between mb-5 font-body">
+    <nav className="grid grid-cols-3 items-center mb-5 font-body">
       <SearchBar />
 
-      <Link to={"/"}>
+      <Link to={"/"} className="justify-self-center">
         <img src={data && data.logoColor} className="w-56" />
       </Link>
 
-      <div className="primary-btn" onClick={openModal}>
+      <div className="primary-btn justify-self-end " onClick={openModal}>
         Upload
       </div>
 
