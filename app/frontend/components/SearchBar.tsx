@@ -1,6 +1,7 @@
-import Select, { components } from "react-select";
+import Select, { components, SingleValue } from "react-select";
 import { useGetVideosByUserIdQuery } from "../app/createVideosApi";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
+import { useNavigate } from "react-router-dom";
 
 type VideoOption = {
   label: string;
@@ -47,8 +48,12 @@ const OptionLabel = (option: VideoOption) => {
 };
 
 export const SearchBar: React.FC = () => {
-  const { data, isSuccess } = useGetVideosByUserIdQuery(userId);
+  const { data, isSuccess, isLoading } = useGetVideosByUserIdQuery(userId);
+  const navigate = useNavigate();
 
+  const handleOptionChange = (newValue: SingleValue<VideoOption>) => {
+    newValue && navigate(`/videos/${newValue.value}`)
+  }
   return (
     <div className="flex w-1/3">
       <Select
@@ -67,6 +72,8 @@ export const SearchBar: React.FC = () => {
         }}
         styles={customStyles}
         formatOptionLabel={OptionLabel}
+        isLoading={isLoading}
+        onChange={handleOptionChange}
       />
     </div>
   );
