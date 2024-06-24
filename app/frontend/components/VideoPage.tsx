@@ -24,12 +24,16 @@ export const VideoPage: React.FC = () => {
       ) : (
         isSuccess && (
           <div className="w-full lg:basis-2/3 md:basis-2/3 h-full flex flex-col justify-items-center  font-body h-viewport space-y-3 ">
-            <div className={"lg:h-130 md:h-96 h-56"}>
+            <div className={"lg:h-130 md:h-96 sm:h-64 h-56"}>
               <ReactPlayer
                 url={data.video["video_url"]}
                 controls={true}
                 width="100%"
                 height="100%"
+                style={{
+                  borderRadius: "40px",
+                  overflow: 'hidden'
+                }}
               />
             </div>
             <div className="font-bold text-xl">{data.video.title}</div>
@@ -54,7 +58,7 @@ export const VideoPage: React.FC = () => {
           </div>
         )
       )}
-      <div className="lg:w-500px justify-self-center">
+      <div className="lg:basis-1/3 justify-self-center">
         <VideosSideBar />
       </div>
     </div>

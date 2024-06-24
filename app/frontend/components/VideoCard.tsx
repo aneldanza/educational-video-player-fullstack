@@ -9,7 +9,11 @@ interface VideoCardProps {
   style: string;
 }
 
-export const VideoCard: React.FC<VideoCardProps> = ({ video, light, style }) => {
+export const VideoCard: React.FC<VideoCardProps> = ({
+  video,
+  light,
+  style,
+}) => {
   const dateMoment = moment(video["created_at"]);
   return (
     <>
@@ -20,6 +24,10 @@ export const VideoCard: React.FC<VideoCardProps> = ({ video, light, style }) => 
           width="100%"
           height="100%"
           light={light}
+          style={{
+            borderRadius: "40px",
+            overflow: "hidden",
+          }}
         />
       </div>
       <div className="font-bold text-xl">{video.title}</div>
