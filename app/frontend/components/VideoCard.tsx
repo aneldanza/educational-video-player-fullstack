@@ -16,7 +16,7 @@ export const VideoCard: React.FC<VideoCardProps> = ({ video, light, style }) => 
       <div className={style}>
         <ReactPlayer
           url={video["video_url"]}
-          controls={true}
+          controls={false}
           width="100%"
           height="100%"
           light={light}
@@ -26,7 +26,7 @@ export const VideoCard: React.FC<VideoCardProps> = ({ video, light, style }) => 
       <div className="flex space-x-3 text-sm">
         <div>{video["user_id"]}</div>
         <div>
-          <span>{`Uploaded ${dateMoment.format("MMMM Do YYYY")}`}</span>
+          <span>{`Uploaded ${dateMoment.fromNow()}`}</span>
         </div>
       </div>
       <div className="flex space-x-1">
