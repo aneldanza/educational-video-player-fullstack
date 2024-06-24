@@ -11,7 +11,7 @@ import { csrfToken } from "../../utils";
 import { useUploadVideoMutation } from "../../app/createVideosApi";
 import { FormInput } from "../layout-components/FormInput";
 import { FormTextarea } from "../layout-components/FormTextarea";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { defaultUserId } from "../../utils";
 
 const uploadValidationSchema = Yup.object({
@@ -33,7 +33,7 @@ interface UploadVideoFormProps {
 export const UploadVideoForm: React.FC<UploadVideoFormProps> = ({
   closeModal,
 }) => {
-  const [uploadVideo] = useUploadVideoMutation();
+  const [uploadVideo, { isError, isSuccess }] = useUploadVideoMutation();
   const [error, setError] = useState<string>("");
   const [searchParams] = useSearchParams();
   let initialValues = {
@@ -43,6 +43,14 @@ export const UploadVideoForm: React.FC<UploadVideoFormProps> = ({
   };
 
   let validationSchema = uploadValidationSchema;
+
+  useEffect(() => {
+    if (isError) {
+      setError("Could not upload the video");
+    } else if (isSuccess) {
+      closeModal();
+    }
+  }, [isSuccess, isError]);
 
   const uploadNewVideo = async (values: {
     title: string;
@@ -77,7 +85,6 @@ export const UploadVideoForm: React.FC<UploadVideoFormProps> = ({
           uploadNewVideo(values);
           actions.resetForm();
           actions.setSubmitting(false);
-          closeModal();
         }}
         validationSchema={validationSchema}
       >
