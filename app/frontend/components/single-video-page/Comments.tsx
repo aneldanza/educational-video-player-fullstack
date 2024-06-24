@@ -1,12 +1,13 @@
-import { useGetCommentsByVideoIdQuery } from "../app/createVideosApi";
+import { useGetCommentsByVideoIdQuery } from "../../app/createVideosApi";
 import moment from "moment";
+import { Spinner } from "../Spinner";
 
 interface CommentsProps {
   videoId: string;
 }
 
 export const Comments: React.FC<CommentsProps> = ({ videoId }) => {
-  const { data, isLoading, isSuccess, error } =
+  const { data, isLoading, isSuccess } =
     useGetCommentsByVideoIdQuery(videoId);
   return (
     <>
@@ -28,9 +29,9 @@ export const Comments: React.FC<CommentsProps> = ({ videoId }) => {
           );
         })
       ) : isLoading ? (
-        <div>Loading...</div>
+        <div><Spinner size={'10'} /></div>
       ) : (
-        <div>{JSON.stringify(error, null, 2)}</div>
+        <div className="font-semibold">Unknown Error. Could not get comments.</div>
       )}
     </>
   );

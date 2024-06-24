@@ -1,4 +1,4 @@
-import { VideoData } from "../types";
+import { VideoData } from "../../types";
 import { Link } from "react-router-dom";
 import { VideoCard } from "./VideoCard";
 
@@ -19,7 +19,6 @@ export const Videos: React.FC<VideosProps> = ({ videos, style }) => {
           >
             <VideoCard
               video={video}
-              light={true}
               style={"w-full h-56 lg:h-64 md:h-56 self-center"}
             />
           </Link>

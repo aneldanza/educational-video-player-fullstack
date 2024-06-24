@@ -9,6 +9,7 @@ export default defineConfig({
       "border border-gray-200 text-black rounded-3xl py-2 px-6 cursor-pointer self-center bg-gray-200",
     "modal-custom":
       "bg-white top-1/4 lg:left-1/4 left-1/8 right-auto bottom-auto fixed lg:w-1/2 w-3/4 border border-gray-700 outline-none rounded-2xl  shadow-dark-500 ",
+    "error": "text-red-700 text-sm"
   },
   darkMode: "class",
   safelist: "p-3 p-4 p-5",
