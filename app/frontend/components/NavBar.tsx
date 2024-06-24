@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import Modal from "react-modal";
 import { UploadVideoForm } from "./UploadVideoForm";
+import { SearchBar } from "./SearchBar";
 
 // const customStyles = {
 //   content: {
@@ -21,7 +22,7 @@ Modal.setAppElement("#root");
 
 export const NavBar = () => {
   const { data, isError, isSuccess, error } = useGetImagePathsQuery("");
-  const [modalIsOpen, setIsOpen] = useState(true);
+  const [modalIsOpen, setIsOpen] = useState(false);
 
   function openModal() {
     setIsOpen(true);
@@ -42,17 +43,19 @@ export const NavBar = () => {
   }
 
   return (
-    <nav className="flex justify-between mb-5 font-body">
-      <div className="border border-black rounded-2xl px-5 self-center">
-        search bar
+    <nav className="grid lg:grid-cols-3 lg:grid-rows-1 grid-rows-2 items-center mb-5 font-body">
+      <div className="row-start-2 lg:row-start-1">
+        <SearchBar />
       </div>
 
-      <Link to={"/"}>
-        <img src={data && data.logoColor} className="w-56" />
-      </Link>
+      <div className="grid grid-cols-2 lg:col-span-2">
+        <Link to={"/"} className="lg:justify-self-center justify-self-start">
+          <img src={data && data.logoColor} className="w-56" />
+        </Link>
 
-      <div className="primary-btn" onClick={openModal}>
-        Upload
+        <div className="primary-btn justify-self-end " onClick={openModal}>
+          Upload
+        </div>
       </div>
 
       <Modal
