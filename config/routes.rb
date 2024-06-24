@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
-  get 'homepage/index'
+  # namespace :api do
+  #   get 'comment/index'
+  #   get 'comment/show'
+  #   get 'comment/create'
+  # end
+  # get 'homepage/index'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
@@ -9,9 +14,12 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root "homepage#index"
 
-  namespace :api do
-    namespace :v1 do
-      resources :videos, only: [:index, :create]
-    end
+  namespace :api, defaults: {format: :json} do
+      get '/videos/get_image_paths', to: 'videos#get_image_paths'
+      resources :videos, only: [:index, :create, :show]
+      resources :comments, only: [:index, :create, :show]
+
   end
+
+  match '*path', to: 'homepage#index', via: :get
 end
