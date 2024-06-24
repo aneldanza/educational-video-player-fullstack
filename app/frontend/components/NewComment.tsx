@@ -61,6 +61,7 @@ export const NewComment: React.FC<NewCommentProps> = ({ videoId }) => {
               name={"comment"}
               icon={<ChatBubbleLeftEllipsisIcon className="w-5 mr-2" />}
               handleChange={props.handleChange}
+              placeholder="Add your comment.."
             />
 
             <button type="submit" className="primary-btn">
