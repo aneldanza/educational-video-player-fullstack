@@ -1,4 +1,4 @@
-import Select, { components, SingleValue } from "react-select";
+import Select, { components, SingleValue, ActionMeta } from "react-select";
 import { useGetVideosByUserIdQuery } from "../app/createVideosApi";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { useNavigate } from "react-router-dom";
@@ -15,6 +15,8 @@ const customStyles = {
     ...base,
     flexDirection: "row-reverse",
     minWidth: "300px",
+    border: "1px solid black",
+    borderRadius: "60px"
   }),
   clearIndicator: (base: any) => ({
     ...base,
@@ -31,7 +33,7 @@ const DropdownIndicator = (props: any) => {
   return (
     components.DropdownIndicator && (
       <components.DropdownIndicator {...props}>
-        <MagnifyingGlassIcon className="w-3" />
+        <MagnifyingGlassIcon className="w-4 text-black" />
       </components.DropdownIndicator>
     )
   );
@@ -51,7 +53,8 @@ export const SearchBar: React.FC = () => {
   const { data, isSuccess, isLoading } = useGetVideosByUserIdQuery(userId);
   const navigate = useNavigate();
 
-  const handleOptionChange = (newValue: SingleValue<VideoOption>) => {
+  const handleOptionChange = (newValue: SingleValue<VideoOption>, actionMeta: ActionMeta<VideoOption>) => {
+    console.log(actionMeta)
     newValue && navigate(`/videos/${newValue.value}`)
   }
   return (
