@@ -9,6 +9,7 @@ import { csrfToken } from "../utils";
 import { useUploadVideoMutation } from "../app/createVideosApi";
 import { FormInput } from "./FormInput";
 import { FormTextarea } from "./FormTextarea";
+import { useState } from "react";
 
 const validationSchema = Yup.object({
   title: Yup.string()
@@ -30,6 +31,7 @@ export const UploadVideoForm: React.FC<UploadVideoFormProps> = ({
   closeModal,
 }) => {
   const [uploadVideo] = useUploadVideoMutation();
+  const [error, setError] = useState<string>("");
   const initialValues = {
     title: "",
     description: "",
@@ -53,13 +55,16 @@ export const UploadVideoForm: React.FC<UploadVideoFormProps> = ({
     try {
       await uploadVideo({ video, token }).unwrap();
     } catch (e) {
-      console.error("failed to upload a video");
+      setError("Failed to upload a video");
     }
   };
 
   return (
     <div className="p-4">
-      <div className="text-xl font-bold mb-4">Upload Video</div>
+      <div className="flex space-x-4">
+        <div className="text-xl font-bold mb-4">Upload Video</div>
+        <div className="error">{error}</div>
+      </div>
       <Formik
         initialValues={initialValues}
         onSubmit={(values, actions) => {
