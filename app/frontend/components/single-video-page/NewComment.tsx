@@ -6,10 +6,10 @@ import {
   Config,
 } from "unique-names-generator";
 import { Formik, Form } from "formik";
-import { useCreateCommentMutation } from "../app/createVideosApi";
-import { csrfToken } from "../utils";
-import { CreateComment } from "../types";
-import { FormInput } from "./FormInput";
+import { useCreateCommentMutation } from "../../app/createVideosApi";
+import { csrfToken } from "../../utils";
+import { CreateComment } from "../../types";
+import { FormInput } from "../layout-components/FormInput";
 import * as Yup from "yup";
 import { useState } from "react";
 

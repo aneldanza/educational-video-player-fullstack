@@ -1,6 +1,6 @@
-import { useGetVideosByUserIdQuery } from "../app/createVideosApi";
-import { Spinner } from "./Spinner";
-import { Videos } from "./Videos";
+import { useGetVideosByUserIdQuery } from "../../app/createVideosApi";
+import { Spinner } from "../Spinner";
+import { Videos } from "../layout-components/Videos";
 import { useParams } from "react-router-dom";
 const userId = "anel_danza";
 

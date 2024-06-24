@@ -1,6 +1,6 @@
-import { useGetCommentsByVideoIdQuery } from "../app/createVideosApi";
+import { useGetCommentsByVideoIdQuery } from "../../app/createVideosApi";
 import moment from "moment";
-import { Spinner } from "./Spinner";
+import { Spinner } from "../Spinner";
 
 interface CommentsProps {
   videoId: string;

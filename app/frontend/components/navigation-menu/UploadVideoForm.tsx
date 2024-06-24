@@ -5,10 +5,10 @@ import {
   TagIcon,
   ChatBubbleLeftEllipsisIcon,
 } from "@heroicons/react/24/outline";
-import { csrfToken } from "../utils";
-import { useUploadVideoMutation } from "../app/createVideosApi";
-import { FormInput } from "./FormInput";
-import { FormTextarea } from "./FormTextarea";
+import { csrfToken } from "../../utils";
+import { useUploadVideoMutation } from "../../app/createVideosApi";
+import { FormInput } from "../layout-components/FormInput";
+import { FormTextarea } from "../layout-components/FormTextarea";
 import { useState } from "react";
 
 const validationSchema = Yup.object({

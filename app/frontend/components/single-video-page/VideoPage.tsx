@@ -1,11 +1,11 @@
-import { useGetVideoByIdQuery } from "../app/createVideosApi";
+import { useGetVideoByIdQuery } from "../../app/createVideosApi";
 import { useParams } from "react-router-dom";
 import moment from "moment";
 import ReactPlayer from "react-player";
 import { ChatBubbleLeftIcon } from "@heroicons/react/24/outline";
 import { VideosSideBar } from "./VideosSideBar";
 import { CommentsContainer } from "./CommentsContainer";
-import { Spinner } from "./Spinner";
+import { Spinner } from "../Spinner";
 
 export const VideoPage: React.FC = () => {
   const { videoId } = useParams();

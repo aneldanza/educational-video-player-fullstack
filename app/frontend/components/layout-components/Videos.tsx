@@ -1,4 +1,4 @@
-import { VideoData } from "../types";
+import { VideoData } from "../../types";
 import { Link } from "react-router-dom";
 import { VideoCard } from "./VideoCard";
 

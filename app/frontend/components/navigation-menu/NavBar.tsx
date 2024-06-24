@@ -1,4 +1,4 @@
-import { useGetImagePathsQuery } from "../app/createVideosApi";
+import { useGetImagePathsQuery } from "../../app/createVideosApi";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import Modal from "react-modal";

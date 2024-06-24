@@ -1,7 +1,7 @@
 import { ChatBubbleLeftIcon } from "@heroicons/react/24/outline";
 import moment from "moment";
 import ReactPlayer from "react-player";
-import { VideoData } from "../types";
+import { VideoData } from "../../types";
 
 interface VideoCardProps {
   video: VideoData;

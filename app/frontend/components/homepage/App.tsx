@@ -1,6 +1,6 @@
-import { useGetVideosByUserIdQuery } from "../app/createVideosApi";
-import { Videos } from "./Videos";
-import { Spinner } from "./Spinner";
+import { useGetVideosByUserIdQuery } from "../../app/createVideosApi";
+import { Videos } from "../layout-components/Videos";
+import { Spinner } from "../Spinner";
 
 const userId = "anel_danza";
 
