@@ -2,7 +2,7 @@
 
 ## Overview
 
-Educational Video Player Fullstack is a web application that allows users to upload, view videos, and leave comments, similar to the functionality of YouTube. The project utilizes Ruby on Rails for the backend to communicate with third-party APIs and for server-side rendering (SSR). The frontend is built with React, TypeScript, and WindiCSS, connected through the vite-rails plugin.
+Educational Video Player Fullstack is a web application that allows users to upload, view videos, and leave comments, similar to the functionality of YouTube. The project utilizes Ruby on Rails for the backend to communicate with third-party APIs and for server-side rendering (SSR). The frontend is built with React, TypeScript, RTK Query, and WindiCSS, connected through the vite-rails plugin.
 
 ## Table of Contents
 - [Installation](#installation)
@@ -10,6 +10,7 @@ Educational Video Player Fullstack is a web application that allows users to upl
   - [Frontend Setup (Vite + React)](#frontend-setup-vite--react)
 - [Usage](#usage)
   - [Uploading a New Video](#uploading-a-new-video)
+  - [Searching for a Video](#searching-for-a-video)
   - [Making a Comment on a Video](#making-a-comment-on-a-video)
 
 
@@ -69,6 +70,15 @@ To upload a new video:
 3. Click `Upload`.
 
 ![Upload a New Video](public/new_video.png)
+
+### Searching for a Video
+
+To search for a video:
+1. Click on the search bar on the top-left corner.
+2. You will see a dropdown with the list of all available videos. You can choose from the list or you can start typing in the search bar to filter the videos further.
+3. Select desired video and click Enter.
+
+![Upload a New Video](public/search_video.png)
 
 ### Making a Comment on a Video
 
