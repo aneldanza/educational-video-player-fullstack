@@ -30,7 +30,7 @@ export const VideosSideBar = () => {
     <main
       className={`${
         "opacity-50" && isFetching
-      } flex-col max-h-screen sticky top-0 h-screen overflow-y-auto`}
+      } flex-col `}
     >
       {isLoading ? (
         <div className="text-center mt-10">

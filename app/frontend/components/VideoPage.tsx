@@ -14,7 +14,7 @@ export const VideoPage: React.FC = () => {
   );
 
   return (
-    <div className="flex lg:flex-row lg:space-x-5 md:flex-row md:space-x-4 flex-col">
+    <div className="flex lg:flex-row lg:space-x-5 md:flex-row md:space-x-4 flex-col space-y-4">
       {isLoading ? (
         <div className="text-center mt-30">
           <Spinner size={"20"} />
