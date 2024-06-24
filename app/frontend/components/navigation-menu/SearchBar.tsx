@@ -1,14 +1,14 @@
 import Select, { components, SingleValue, ActionMeta } from "react-select";
+import { useSearchParams } from "react-router-dom";
 import { useGetVideosByUserIdQuery } from "../../app/createVideosApi";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { useNavigate } from "react-router-dom";
+import { defaultUserId } from "../../utils";
 
 type VideoOption = {
   label: string;
   value: string;
 };
-
-const userId = "anel_danza";
 
 const customStyles = {
   control: (base: any) => ({
@@ -50,7 +50,10 @@ const OptionLabel = (option: VideoOption) => {
 };
 
 export const SearchBar: React.FC = () => {
-  const { data, isSuccess, isLoading } = useGetVideosByUserIdQuery(userId);
+  const [searchParams] = useSearchParams();
+  const { data, isSuccess, isLoading } = useGetVideosByUserIdQuery(
+    searchParams.get("user_id") || defaultUserId
+  );
   const navigate = useNavigate();
 
   const handleOptionChange = (

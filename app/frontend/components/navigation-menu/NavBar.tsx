@@ -1,17 +1,24 @@
+import { useSearchParams, useParams } from "react-router-dom";
 import { useGetImagePathsQuery } from "../../app/createVideosApi";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import Modal from "react-modal";
 import { UploadVideoForm } from "./UploadVideoForm";
 import { SearchBar } from "./SearchBar";
+import { defaultUserId } from "../../utils";
+import { EditVideoForm } from "./EditVideoForm";
 
 Modal.setAppElement("#root");
 
 export const NavBar = () => {
   const { data } = useGetImagePathsQuery("");
+  const [searchParams] = useSearchParams();
+  const { videoId } = useParams();
   const [modalIsOpen, setIsOpen] = useState(false);
+  const [action, setAction] = useState<string>("");
 
-  function openModal() {
+  function openModal(action: string) {
+    setAction(action);
     setIsOpen(true);
   }
 
@@ -26,12 +33,28 @@ export const NavBar = () => {
       </div>
 
       <div className="grid grid-cols-2 lg:col-span-2">
-        <Link to={"/"} className="lg:justify-self-center justify-self-start">
+        <Link
+          to={`/?user_id=${searchParams.get("user_id") || defaultUserId}`}
+          className="lg:justify-self-center justify-self-start"
+        >
           <img src={data && data.logoColor} className="w-56" />
         </Link>
 
-        <div className="primary-btn justify-self-end " onClick={openModal}>
-          Upload
+        <div className="flex justify-self-end space-x-3 align-items-center">
+          {videoId && (
+            <div
+              className="primary-btn  "
+              onClick={openModal.bind(this, "edit")}
+            >
+              Edit
+            </div>
+          )}
+          <div
+            className="primary-btn "
+            onClick={openModal.bind(this, "upload")}
+          >
+            Upload
+          </div>
         </div>
       </div>
 
@@ -41,7 +64,7 @@ export const NavBar = () => {
         className="modal-custom"
         contentLabel="Upload Video Modal"
       >
-        <UploadVideoForm closeModal={closeModal} />
+        {action === 'upload' ? <UploadVideoForm closeModal={closeModal} /> : <EditVideoForm closeModal={closeModal} />}
       </Modal>
     </nav>
   );

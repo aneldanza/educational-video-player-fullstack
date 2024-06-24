@@ -11,6 +11,25 @@ class Api::VideosController < ApplicationController
     end
   end
 
+  def update
+    puts 'RECEIVED UPDATE REQUEST'
+   
+    @video = {"title": params[:title], "description": params[:description], "video_id": params[:video_id]}
+
+    connection = Faraday.new(url: 'https://take-home-assessment-423502.uc.r.appspot.com/api')
+
+    response = connection.put('/videos') do |req|
+      req.headers['Content-Type'] = 'application/json'
+      req.body = JSON.generate(@video)
+    end
+    
+    if response.status === 200
+      render json: JSON.parse(response.body)
+    else
+      render error: 'COULD NOT UPDATE VIDEO'
+    end
+  end
+
   def create
     puts 'RECEIVED CREATE REQUEST'
    

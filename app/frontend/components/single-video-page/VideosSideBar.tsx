@@ -1,13 +1,15 @@
+import { useSearchParams } from "react-router-dom";
 import { useGetVideosByUserIdQuery } from "../../app/createVideosApi";
 import { Spinner } from "../Spinner";
 import { Videos } from "../layout-components/Videos";
 import { useParams } from "react-router-dom";
-const userId = "anel_danza";
+import { defaultUserId } from "../../utils";
 
 export const VideosSideBar = () => {
   const { videoId } = useParams();
+  const [searchParams] = useSearchParams();
   const { data, isLoading, isError, isSuccess, isFetching } =
-    useGetVideosByUserIdQuery(userId);
+    useGetVideosByUserIdQuery(searchParams.get("user_id") || defaultUserId);
 
   let content;
 
@@ -27,11 +29,7 @@ export const VideosSideBar = () => {
   }
 
   return (
-    <main
-      className={`${
-        "opacity-50" && isFetching
-      } flex-col `}
-    >
+    <main className={`${"opacity-50" && isFetching} flex-col `}>
       {isLoading ? (
         <div className="text-center mt-10">
           <Spinner size={"10"} />

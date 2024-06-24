@@ -16,7 +16,7 @@ Rails.application.routes.draw do
 
   namespace :api, defaults: {format: :json} do
       get '/videos/get_image_paths', to: 'videos#get_image_paths'
-      resources :videos, only: [:index, :create, :show]
+      resources :videos, only: [:index, :create, :show, :update]
       resources :comments, only: [:index, :create, :show]
 
   end

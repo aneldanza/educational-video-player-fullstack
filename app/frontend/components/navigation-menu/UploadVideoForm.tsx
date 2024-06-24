@@ -1,3 +1,4 @@
+import { useSearchParams } from "react-router-dom";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import {
@@ -5,21 +6,23 @@ import {
   TagIcon,
   ChatBubbleLeftEllipsisIcon,
 } from "@heroicons/react/24/outline";
+import isEqual from "lodash.isequal";
 import { csrfToken } from "../../utils";
 import { useUploadVideoMutation } from "../../app/createVideosApi";
 import { FormInput } from "../layout-components/FormInput";
 import { FormTextarea } from "../layout-components/FormTextarea";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { defaultUserId } from "../../utils";
 
-const validationSchema = Yup.object({
+const uploadValidationSchema = Yup.object({
   title: Yup.string()
     .max(30, "Must be 30 characters or less")
     .required("Required"),
   description: Yup.string()
-    .max(30, "Must be 300 characters or less")
+    .max(300, "Must be 300 characters or less")
     .required("Required"),
   url: Yup.string()
-    .max(30, "Must be 100 characters or less")
+    .max(100, "Must be 100 characters or less")
     .required("Required"),
 });
 
@@ -30,13 +33,24 @@ interface UploadVideoFormProps {
 export const UploadVideoForm: React.FC<UploadVideoFormProps> = ({
   closeModal,
 }) => {
-  const [uploadVideo] = useUploadVideoMutation();
+  const [uploadVideo, { isError, isSuccess }] = useUploadVideoMutation();
   const [error, setError] = useState<string>("");
-  const initialValues = {
+  const [searchParams] = useSearchParams();
+  let initialValues = {
     title: "",
     description: "",
     url: "",
   };
+
+  let validationSchema = uploadValidationSchema;
+
+  useEffect(() => {
+    if (isError) {
+      setError("Could not upload the video");
+    } else if (isSuccess) {
+      closeModal();
+    }
+  }, [isSuccess, isError]);
 
   const uploadNewVideo = async (values: {
     title: string;
@@ -47,7 +61,7 @@ export const UploadVideoForm: React.FC<UploadVideoFormProps> = ({
       title: values.title,
       description: values.description,
       video_url: values.url,
-      user_id: "anel_danza",
+      user_id: searchParams.get("user_id") || defaultUserId,
     };
 
     const token = csrfToken();
@@ -71,7 +85,6 @@ export const UploadVideoForm: React.FC<UploadVideoFormProps> = ({
           uploadNewVideo(values);
           actions.resetForm();
           actions.setSubmitting(false);
-          closeModal();
         }}
         validationSchema={validationSchema}
       >
@@ -85,7 +98,6 @@ export const UploadVideoForm: React.FC<UploadVideoFormProps> = ({
               placeholder="Title your video"
               meta={props.getFieldMeta("title")}
             />
-
             <FormTextarea
               icon={
                 <ChatBubbleLeftEllipsisIcon className="w-5 mr-2 self-start" />
@@ -96,7 +108,6 @@ export const UploadVideoForm: React.FC<UploadVideoFormProps> = ({
               placeholder="Add description"
               meta={props.getFieldMeta("description")}
             />
-
             <FormInput
               icon={<LinkIcon className="w-5 mr-2" />}
               value={props.values.url}
@@ -107,10 +118,20 @@ export const UploadVideoForm: React.FC<UploadVideoFormProps> = ({
             />
 
             <div className="flex space-x-4 justify-end">
-              <button type="reset" className="secondary-btn">
-                Cancel
+              <button
+                type="reset"
+                className="secondary-btn"
+                onClick={() => props.setValues(initialValues)}
+              >
+                Reset
               </button>
-              <button className="primary-btn" type="submit">
+              <button
+                className={`primary-btn ${
+                  isEqual(props.values, initialValues) &&
+                  "pointer-events-none bg-opacity-50 border-opacity-50"
+                }`}
+                type="submit"
+              >
                 Upload
               </button>
             </div>
