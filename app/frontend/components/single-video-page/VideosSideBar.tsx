@@ -15,8 +15,8 @@ export const VideosSideBar = () => {
 
   if (isLoading) {
     content = (
-      <div className="text-center">
-        <Spinner size={"10"} />
+      <div className="text-center flex">
+        <Spinner size={"20"} />
       </div>
     );
   } else if (isSuccess) {

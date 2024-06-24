@@ -16,8 +16,8 @@ export const VideoPage: React.FC = () => {
   return (
     <div className="flex lg:flex-row lg:space-x-7 md:flex-row md:space-x-4 sm:flex-row flex-col space-y-4">
       {isLoading ? (
-        <div className="text-center mt-30">
-          <Spinner size={"20"} />
+        <div className="text-center mt-30 md:basis-2/3 lg:basis-2/3 w-full flex">
+          <Spinner size={"30"} />
         </div>
       ) : isError ? (
         <div className="text-center font-bold text-lg mt-50">Unknown Error</div>
