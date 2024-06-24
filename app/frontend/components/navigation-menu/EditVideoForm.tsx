@@ -13,7 +13,7 @@ import {
 } from "../../app/createVideosApi";
 import { FormInput } from "../layout-components/FormInput";
 import { FormTextarea } from "../layout-components/FormTextarea";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const editValidationSchema = Yup.object({
   title: Yup.string()
@@ -29,34 +29,23 @@ interface EditVideoFormProps {
 }
 
 export const EditVideoForm: React.FC<EditVideoFormProps> = ({ closeModal }) => {
-  const [updateVideoById] = useUpdateVideoByIdMutation();
+  const [
+    updateVideoById,
+    { isError: isUpdateError, isSuccess: isUpdateSuccess },
+  ] = useUpdateVideoByIdMutation();
   const [serverError, setError] = useState<string>("");
 
   const { videoId } = useParams();
 
-  const { data, isSuccess, isError, error } = useGetVideoByIdQuery(videoId || "");
-  if (isError) {
-    setError("Could not update the video.")
-  }
+  const { data, isSuccess } = useGetVideoByIdQuery(videoId || "");
 
-  const updateVideo = async (values: {
-    title: string;
-    description: string;
-  }) => {
-    const data = {
-      video_id: videoId!,
-      title: values.title,
-      description: values.description,
-    };
-
-    const token = csrfToken();
-
-    try {
-      await updateVideoById({ data, token }).unwrap();
-    } catch (e) {
-      setError("Failed to upload a video");
+  useEffect(() => {
+    if (isUpdateError) {
+      setError("Could not update the video");
+    } else if (isUpdateSuccess) {
+      closeModal();
     }
-  };
+  }, [isUpdateError, isUpdateSuccess]);
 
   return (
     <div className="p-4">
@@ -70,11 +59,15 @@ export const EditVideoForm: React.FC<EditVideoFormProps> = ({ closeModal }) => {
             title: data.video.title,
             description: data.video.description,
           }}
-          onSubmit={(values, actions) => {
-            updateVideo(values);
+          onSubmit={async (values, actions) => {
+            const data = {
+              video_id: videoId!,
+              ...values,
+            };
+
+            await updateVideoById({ data, token: csrfToken() }).unwrap();
             actions.resetForm();
             actions.setSubmitting(false);
-            closeModal();
           }}
           validationSchema={editValidationSchema}
         >
