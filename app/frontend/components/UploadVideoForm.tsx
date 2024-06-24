@@ -8,17 +8,18 @@ import {
 import { csrfToken } from "../utils";
 import { useUploadVideoMutation } from "../app/createVideosApi";
 import { FormInput } from "./FormInput";
+import { FormTextarea } from "./FormTextarea";
 
 const validationSchema = Yup.object({
   title: Yup.string()
-  .max(30, 'Must be 30 characters or less')
-  .required('Required'),
+    .max(30, "Must be 30 characters or less")
+    .required("Required"),
   description: Yup.string()
-  .max(30, 'Must be 300 characters or less')
-  .required('Required'),
+    .max(30, "Must be 300 characters or less")
+    .required("Required"),
   url: Yup.string()
-  .max(30, 'Must be 100 characters or less')
-  .required('Required'),
+    .max(30, "Must be 100 characters or less")
+    .required("Required"),
 });
 
 interface UploadVideoFormProps {
@@ -79,14 +80,18 @@ export const UploadVideoForm: React.FC<UploadVideoFormProps> = ({
               placeholder="Title your video"
               meta={props.getFieldMeta("title")}
             />
-            <FormInput
-              icon={<ChatBubbleLeftEllipsisIcon className="w-5 mr-2" />}
+
+            <FormTextarea
+              icon={
+                <ChatBubbleLeftEllipsisIcon className="w-5 mr-2 self-start" />
+              }
               value={props.values.description}
               name={"description"}
               handleChange={props.handleChange}
               placeholder="Add description"
               meta={props.getFieldMeta("description")}
             />
+
             <FormInput
               icon={<LinkIcon className="w-5 mr-2" />}
               value={props.values.url}
