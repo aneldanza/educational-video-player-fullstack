@@ -1,4 +1,5 @@
 import { Formik, Form } from "formik";
+import * as Yup from "yup";
 import {
   LinkIcon,
   TagIcon,
@@ -8,11 +9,25 @@ import { csrfToken } from "../utils";
 import { useUploadVideoMutation } from "../app/createVideosApi";
 import { FormInput } from "./FormInput";
 
+const validationSchema = Yup.object({
+  title: Yup.string()
+  .max(30, 'Must be 30 characters or less')
+  .required('Required'),
+  description: Yup.string()
+  .max(30, 'Must be 300 characters or less')
+  .required('Required'),
+  url: Yup.string()
+  .max(30, 'Must be 100 characters or less')
+  .required('Required'),
+});
+
 interface UploadVideoFormProps {
   closeModal: () => void;
 }
 
-export const UploadVideoForm:React.FC<UploadVideoFormProps> = ({closeModal}) => {
+export const UploadVideoForm: React.FC<UploadVideoFormProps> = ({
+  closeModal,
+}) => {
   const [uploadVideo] = useUploadVideoMutation();
   const initialValues = {
     title: "",
@@ -50,8 +65,9 @@ export const UploadVideoForm:React.FC<UploadVideoFormProps> = ({closeModal}) => 
           uploadNewVideo(values);
           actions.resetForm();
           actions.setSubmitting(false);
-          closeModal()
+          closeModal();
         }}
+        validationSchema={validationSchema}
       >
         {(props) => (
           <Form className="flex flex-col space-y-4">
@@ -61,6 +77,7 @@ export const UploadVideoForm:React.FC<UploadVideoFormProps> = ({closeModal}) => 
               name={"title"}
               handleChange={props.handleChange}
               placeholder="Title your video"
+              meta={props.getFieldMeta("title")}
             />
             <FormInput
               icon={<ChatBubbleLeftEllipsisIcon className="w-5 mr-2" />}
@@ -68,6 +85,7 @@ export const UploadVideoForm:React.FC<UploadVideoFormProps> = ({closeModal}) => 
               name={"description"}
               handleChange={props.handleChange}
               placeholder="Add description"
+              meta={props.getFieldMeta("description")}
             />
             <FormInput
               icon={<LinkIcon className="w-5 mr-2" />}
@@ -75,6 +93,7 @@ export const UploadVideoForm:React.FC<UploadVideoFormProps> = ({closeModal}) => 
               name={"url"}
               handleChange={props.handleChange}
               placeholder="https://www.your-video-link.com"
+              meta={props.getFieldMeta("url")}
             />
 
             <div className="flex space-x-4 justify-end">
