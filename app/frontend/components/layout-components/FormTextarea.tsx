@@ -32,7 +32,7 @@ export const FormTextarea: React.FC<FormTextareaProps> = ({
         <textarea
           id={name}
           name={name}
-          defaultValue={value}
+          value={value}
           onChange={(e) => {
             handleChange(e);
           }}

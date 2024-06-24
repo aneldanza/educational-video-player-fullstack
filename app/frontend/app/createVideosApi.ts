@@ -55,6 +55,21 @@ export const videosApi = createApi({
       query: (id) => `/videos/${id}`,
       providesTags: ["Video"],
     }),
+    updateVideoById: builder.mutation<any, {data: {title?: string; description?: string; video_id: string}, token: string}>({
+      query: (payload) => {
+        return {
+          url: `videos/${payload.data.video_id}`,
+          method: "put",
+          body: JSON.stringify(payload.data),
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            "X-CSRF-Token": payload.token,
+          },
+        }
+      },
+      invalidatesTags: ["Videos", "Video"]
+    }),
     getImagePaths: builder.query({
       query: () => "/videos/get_image_paths",
     }),
@@ -90,4 +105,5 @@ export const {
   useGetImagePathsQuery,
   useGetCommentsByVideoIdQuery,
   useCreateCommentMutation,
+  useUpdateVideoByIdMutation
 } = videosApi;

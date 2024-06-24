@@ -6,6 +6,7 @@ import Modal from "react-modal";
 import { UploadVideoForm } from "./UploadVideoForm";
 import { SearchBar } from "./SearchBar";
 import { defaultUserId } from "../../utils";
+import { EditVideoForm } from "./EditVideoForm";
 
 Modal.setAppElement("#root");
 
@@ -63,7 +64,7 @@ export const NavBar = () => {
         className="modal-custom"
         contentLabel="Upload Video Modal"
       >
-        <UploadVideoForm closeModal={closeModal} action={action} />
+        {action === 'upload' ? <UploadVideoForm closeModal={closeModal} /> : <EditVideoForm closeModal={closeModal} />}
       </Modal>
     </nav>
   );
