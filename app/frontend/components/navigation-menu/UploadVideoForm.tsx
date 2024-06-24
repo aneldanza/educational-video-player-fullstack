@@ -1,3 +1,4 @@
+import { useSearchParams } from "react-router-dom";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import {
@@ -10,6 +11,7 @@ import { useUploadVideoMutation } from "../../app/createVideosApi";
 import { FormInput } from "../layout-components/FormInput";
 import { FormTextarea } from "../layout-components/FormTextarea";
 import { useState } from "react";
+import { defaultUserId } from "../../utils";
 
 const validationSchema = Yup.object({
   title: Yup.string()
@@ -32,6 +34,7 @@ export const UploadVideoForm: React.FC<UploadVideoFormProps> = ({
 }) => {
   const [uploadVideo] = useUploadVideoMutation();
   const [error, setError] = useState<string>("");
+  const [searchParams] = useSearchParams();
   const initialValues = {
     title: "",
     description: "",
@@ -47,7 +50,7 @@ export const UploadVideoForm: React.FC<UploadVideoFormProps> = ({
       title: values.title,
       description: values.description,
       video_url: values.url,
-      user_id: "anel_danza",
+      user_id: searchParams.get("user_id") || defaultUserId,
     };
 
     const token = csrfToken();

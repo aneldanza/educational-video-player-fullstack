@@ -4,3 +4,5 @@ export const csrfToken = () => {
 
   return token ?? "";
 };
+
+export const defaultUserId = "anel_danza"

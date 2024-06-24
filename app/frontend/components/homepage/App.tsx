@@ -1,12 +1,13 @@
+import { useSearchParams } from "react-router-dom";
 import { useGetVideosByUserIdQuery } from "../../app/createVideosApi";
 import { Videos } from "../layout-components/Videos";
 import { Spinner } from "../Spinner";
-
-const userId = "anel_danza";
+import { defaultUserId } from "../../utils";
 
 export function App() {
+  const [searchParams] = useSearchParams();
   const { data, isLoading, isError, isSuccess, isFetching } =
-    useGetVideosByUserIdQuery(userId);
+    useGetVideosByUserIdQuery(searchParams.get("user_id") || defaultUserId);
 
   let content;
 

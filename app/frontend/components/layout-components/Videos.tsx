@@ -1,6 +1,9 @@
+import { useSearchParams } from "react-router-dom";
 import { VideoData } from "../../types";
 import { Link } from "react-router-dom";
 import { VideoCard } from "./VideoCard";
+import { defaultUserId } from "../../utils";
+
 
 interface VideosProps {
   videos: VideoData[];
@@ -8,13 +11,14 @@ interface VideosProps {
 }
 
 export const Videos: React.FC<VideosProps> = ({ videos, style }) => {
+  const [searchParams] = useSearchParams()
   return (
     <div className={style}>
       {videos.map((video, i) => {
         return (
           <Link
             key={`video-${i}`}
-            to={`/videos/${video.id}`}
+            to={`/videos/${video.id}?user_id=${searchParams.get("user_id") || defaultUserId}`}
             className="no-underline text-black"
           >
             <VideoCard
