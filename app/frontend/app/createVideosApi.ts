@@ -26,15 +26,6 @@ export const videosApi = createApi({
         };
       },
       providesTags: ["Videos"],
-      transformErrorResponse: (
-        val: FetchBaseQueryError,
-        meta: FetchBaseQueryMeta | undefined,
-        arg: string
-      ) => {
-        console.log(val);
-        console.log(meta);
-        console.log(arg);
-      },
     }),
     uploadVideo: builder.mutation<any, { video: Video; token: string }>({
       query: (payload) => {
