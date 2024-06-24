@@ -1,5 +1,6 @@
 import { useGetVideosByUserIdQuery } from "../app/createVideosApi";
 import { Videos } from "./Videos";
+import { Spinner } from "./Spinner";
 
 const userId = "anel_danza";
 
@@ -10,7 +11,11 @@ export function App() {
   let content;
 
   if (isLoading) {
-    content = <div>Loading...</div>;
+    content = (
+      <div className="mt-50 text-center">
+        <Spinner size={"30"} />
+      </div>
+    );
   } else if (isSuccess) {
     if (data && data.videos.length > 0) {
       content = (
@@ -27,7 +32,9 @@ export function App() {
       );
     }
   } else if (isError) {
-    content = <div className="text-center text-lg mt-50">Unknown Error</div>;
+    content = (
+      <div className="text-center font-bold text-lg mt-50">Unknown Error</div>
+    );
   }
 
   return (
