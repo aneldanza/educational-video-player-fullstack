@@ -1,5 +1,6 @@
 import { NavBar } from "../navigation-menu/NavBar";
-import { Outlet } from "react-router-dom";
+import { Outlet, ScrollRestoration } from "react-router-dom";
+
 
 export const Layout = () => {
   return (
@@ -7,6 +8,7 @@ export const Layout = () => {
       <NavBar />
       <div>
         <Outlet />
+        <ScrollRestoration />
       </div>
     </div>
   );

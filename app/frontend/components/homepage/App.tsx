@@ -14,7 +14,7 @@ export function App() {
   if (isLoading) {
     content = (
       <div className="mt-50 text-center">
-        <Spinner size={"30"} />
+        <Spinner size={"40"} />
       </div>
     );
   } else if (isSuccess) {
