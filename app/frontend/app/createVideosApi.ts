@@ -62,16 +62,19 @@ export const videosApi = createApi({
     }),
     getVideoById: builder.query<{ video: VideoData }, string>({
       query: (id) => `/videos/${id}`,
-      providesTags: ["Video"]
+      providesTags: ["Video"],
     }),
     getImagePaths: builder.query({
-      query: () => '/videos/get_image_paths'
+      query: () => "/videos/get_image_paths",
     }),
-    getCommentsByVideoId: builder.query<{comments: CommentData[]}, string>({
+    getCommentsByVideoId: builder.query<{ comments: CommentData[] }, string>({
       query: (videoId) => `comments?video_id=${videoId}`,
-      providesTags: ['Comment']
+      providesTags: ["Comment"],
     }),
-    createComment: builder.mutation<any, {comment: CreateComment; token: string}>({
+    createComment: builder.mutation<
+      any,
+      { comment: CreateComment; token: string }
+    >({
       query: (payload) => {
         return {
           url: "comments",
@@ -83,9 +86,9 @@ export const videosApi = createApi({
             "X-CSRF-Token": payload.token,
           },
         };
-      }, 
-      invalidatesTags: ["Comment", "Video"]
-    })
+      },
+      invalidatesTags: ["Comment", "Video"],
+    }),
   }),
 });
 
@@ -95,5 +98,5 @@ export const {
   useGetVideoByIdQuery,
   useGetImagePathsQuery,
   useGetCommentsByVideoIdQuery,
-  useCreateCommentMutation
+  useCreateCommentMutation,
 } = videosApi;

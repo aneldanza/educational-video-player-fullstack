@@ -22,7 +22,7 @@ export const FormInput: React.FC<FormInputProps> = ({
   const isError = meta && meta.touched && meta.error;
 
   return (
-    <div>
+    <div className="w-full">
       <div
         className={`w-full border px-4 p-2 rounded-3xl self-center flex ${
           focused ? "border-black" : "border-gray-300"
