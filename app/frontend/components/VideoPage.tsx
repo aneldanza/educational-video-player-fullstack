@@ -14,7 +14,7 @@ export const VideoPage: React.FC = () => {
   );
 
   return (
-    <div className="flex lg:flex-row lg:space-x-5 md:flex-row md:space-x-4 flex-col space-y-4">
+    <div className="flex lg:flex-row lg:space-x-7 md:flex-row md:space-x-4 sm:flex-row flex-col space-y-4">
       {isLoading ? (
         <div className="text-center mt-30">
           <Spinner size={"20"} />
@@ -24,7 +24,7 @@ export const VideoPage: React.FC = () => {
       ) : (
         isSuccess && (
           <div className="w-full lg:basis-2/3 md:basis-2/3 h-full flex flex-col justify-items-center  font-body h-viewport space-y-3 ">
-            <div className={"lg:h-130 md:h-96 sm:h-64 h-56"}>
+            <div className={"2xl:h-170 xl:h-150 lg:h-130 md:h-96 sm:h-64 h-56"}>
               <ReactPlayer
                 url={data.video["video_url"]}
                 controls={true}
@@ -36,7 +36,7 @@ export const VideoPage: React.FC = () => {
                 }}
               />
             </div>
-            <div className="font-bold text-xl">{data.video.title}</div>
+            <div className="font-bold text-2xl">{data.video.title}</div>
             <div className="flex space-x-3 text-sm">
               <div>{data.video["user_id"]}</div>
               <div>

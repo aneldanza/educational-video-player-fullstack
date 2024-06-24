@@ -21,7 +21,7 @@ export function App() {
       content = (
         <Videos
           videos={data.videos}
-          style="grid grid-cols-1 gap-10 lg:grid-cols-3 md:grid-cols-2 "
+          style="grid grid-cols-1 gap-10 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 "
         />
       );
     } else {

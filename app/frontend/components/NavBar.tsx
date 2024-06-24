@@ -20,7 +20,7 @@ export const NavBar = () => {
   }
 
   return (
-    <nav className="grid lg:grid-cols-3 lg:grid-rows-1 grid-rows-2 items-center mb-5 font-body">
+    <nav className="grid lg:grid-cols-3 lg:grid-rows-1 grid-rows-2 items-center mb-10 font-body">
       <div className="row-start-2 lg:row-start-1">
         <SearchBar />
       </div>

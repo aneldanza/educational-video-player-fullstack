@@ -39,7 +39,7 @@ export const VideosSideBar = () => {
       ) : isSuccess ? (
         <Videos
           videos={data.videos.filter((video) => video.id !== videoId)}
-          style="grid grid-cols-1 gap-4"
+          style="grid grid-cols-1 gap-4 sm:h-36 md:h-40 2xl:h-80"
         />
       ) : (
         <div className="text-center font-bold text-lg mt-50">Unknown Error</div>
