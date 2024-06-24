@@ -1,16 +1,17 @@
-# README
-
 # Educational Video Player Fullstack
 
-A brief description of your project.
+## Overview
+
+Educational Video Player Fullstack is a web application that allows users to upload, view videos, and leave comments, similar to the functionality of YouTube. The project utilizes Ruby on Rails for the backend to communicate with third-party APIs and for server-side rendering (SSR). The frontend is built with React, TypeScript, and WindiCSS, connected through the vite-rails plugin.
 
 ## Table of Contents
 - [Installation](#installation)
   - [Backend Setup (Ruby on Rails)](#backend-setup-ruby-on-rails)
-  - [Frontend Setup (React)](#frontend-setup-react)
+  - [Frontend Setup (Vite + React)](#frontend-setup-vite--react)
 - [Usage](#usage)
-- [Contributing](#contributing)
-- [License](#license)
+  - [Uploading a New Video](#uploading-a-new-video)
+  - [Making a Comment on a Video](#making-a-comment-on-a-video)
+
 
 ## Installation
 
@@ -38,7 +39,7 @@ A brief description of your project.
     ```bash
     rails server
     ```
-    Your backend API should now be running on `http://localhost:3000`. If you look at the page you will see an error. That's because we need to add the frontend as well.
+    Your backend API should now be running on `http://localhost:3000`. You may encounter an error initially because the frontend needs to be set up as well.
 
 ### Frontend Setup (Vite + React)
 
@@ -46,7 +47,7 @@ A brief description of your project.
     Ensure you have Node.js and npm installed. You can download them from [here](https://nodejs.org/).
 
 2. **Install frontend dependencies**
-    In the project directory, open new tab in your terminal and run command:
+    Open a new terminal tab in the project directory and run:
     ```bash
     npm install
     ```
@@ -56,21 +57,26 @@ A brief description of your project.
     npm run dev
     ```
 
-You can go back to `http://localhost:3000` now and you should see the app.
+You can now visit `http://localhost:3000` to see the app in action.
 
 ## Usage
 
-Explain how to use your project, including any commands or scripts that need to be run. Provide examples or screenshots if possible.
+### Uploading a New Video
 
-Example:
-```bash
-# Running both frontend and backend simultaneously
-# Open two terminal windows/tabs
+To upload a new video:
+1. Click on the `Upload` button in the top-right corner.
+2. Add a title, description, and URL of the video.
+3. Click `Upload`.
 
-# In the first terminal (for Rails backend):
-cd backend
-rails server
+![Upload a New Video](public/new_video.png)
 
-# In the second terminal (for React frontend):
-cd frontend
-npm start
+### Making a Comment on a Video
+
+To comment on a video:
+1. Click on any video from the list.
+2. Under the opened video, find the form with the `Comment` button.
+3. Add your comment in the input field.
+4. Click `Comment`.
+
+![Comment on a Video](public/comment.png)
+
