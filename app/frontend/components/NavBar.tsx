@@ -43,13 +43,13 @@ export const NavBar = () => {
   }
 
   return (
-    <nav className="grid lg:grid-cols-2 lg:grid-rows-1 grid-rows-2 items-center mb-5 font-body">
+    <nav className="grid lg:grid-cols-3 lg:grid-rows-1 grid-rows-2 items-center mb-5 font-body">
       <div className="row-start-2 lg:row-start-1">
         <SearchBar />
       </div>
 
-      <div className="grid grid-cols-2">
-        <Link to={"/"} className="justify-self-center ">
+      <div className="grid grid-cols-2 lg:col-span-2">
+        <Link to={"/"} className="lg:justify-self-center justify-self-start">
           <img src={data && data.logoColor} className="w-56" />
         </Link>
 
