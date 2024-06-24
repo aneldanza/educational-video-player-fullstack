@@ -8,7 +8,7 @@ export const Spinner:React.FC<SpinnerProps> = ({size}) => {
     <div role="status">
       <svg
         aria-hidden="true"
-        className={`inline lg:w-${size} lg:h-${size} w-${Number(size)/2} h-${Number(size)/2} text-gray-200 animate-spin dark:text-gray-600 fill-carribean`}
+        className={`inline lg:w-${size} lg:h-${size} text-gray-200 animate-spin dark:text-gray-600 fill-carribean`}
         viewBox="0 0 100 101"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
