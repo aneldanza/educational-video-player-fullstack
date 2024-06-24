@@ -5,25 +5,23 @@ import { VideoData } from "../types";
 
 interface VideoCardProps {
   video: VideoData;
-  light: boolean;
   style: string;
 }
 
 export const VideoCard: React.FC<VideoCardProps> = ({
   video,
-  light,
   style,
 }) => {
 
   return (
     <>
-      <div className={`${style} `} >
+      <div className={`${style} pointer-events-none`} >
         <ReactPlayer
           url={video["video_url"]}
           controls={false}
           width="100%"
           height="100%"
-          light={light}
+          light={true}
           style={{
             borderRadius: "40px",
             overflow: "hidden",
