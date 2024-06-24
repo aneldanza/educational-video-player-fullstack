@@ -10,6 +10,7 @@ Educational Video Player Fullstack is a web application that allows users to upl
   - [Frontend Setup (Vite + React)](#frontend-setup-vite--react)
 - [Usage](#usage)
   - [Uploading a New Video](#uploading-a-new-video)
+  - [Editing a Video](#editing-a-new-video)
   - [Searching for a Video](#searching-for-a-video)
   - [Making a Comment on a Video](#making-a-comment-on-a-video)
 
@@ -70,6 +71,16 @@ To upload a new video:
 3. Click `Upload`.
 
 ![Upload a New Video](public/new_video.png)
+
+### Editing a Video
+
+To edit a video:
+1. Navigate to the video page
+2. Click on the `Edit` button in the top-right corner.
+2. Edit the title or the description of the video.
+3. Click `Edit`.
+
+![Upload a New Video](public/edit_video.png)
 
 ### Searching for a Video
 
