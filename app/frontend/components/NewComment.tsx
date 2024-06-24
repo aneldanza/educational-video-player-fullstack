@@ -11,6 +11,7 @@ import { csrfToken } from "../utils";
 import { CreateComment } from "../types";
 import { FormInput } from "./FormInput";
 import * as Yup from "yup";
+import { useState } from "react";
 
 interface NewCommentProps {
   videoId: string;
@@ -24,7 +25,7 @@ const customConfig: Config = {
 
 export const NewComment: React.FC<NewCommentProps> = ({ videoId }) => {
   const [createComment] = useCreateCommentMutation();
-
+  const [error, setError] = useState<string>("");
   const initialValues: { comment: string } = { comment: "" };
 
   const handleComment = async (content: string) => {
@@ -41,7 +42,7 @@ export const NewComment: React.FC<NewCommentProps> = ({ videoId }) => {
     try {
       await createComment(payload).unwrap();
     } catch (e) {
-      console.log("failed to create new comment");
+      setError("Failed to create new comment");
     }
   };
 
@@ -79,6 +80,7 @@ export const NewComment: React.FC<NewCommentProps> = ({ videoId }) => {
           </div>
         )}
       </Formik>
+      <div className="error">{error}</div>
     </div>
   );
 };
