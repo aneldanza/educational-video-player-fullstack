@@ -43,15 +43,19 @@ export const NavBar = () => {
   }
 
   return (
-    <nav className="grid grid-cols-3 items-center mb-5 font-body">
-      <SearchBar />
+    <nav className="grid lg:grid-cols-2 lg:grid-rows-1 grid-rows-2 items-center mb-5 font-body">
+      <div className="row-start-2 lg:row-start-1">
+        <SearchBar />
+      </div>
 
-      <Link to={"/"} className="justify-self-center">
-        <img src={data && data.logoColor} className="w-56" />
-      </Link>
+      <div className="grid grid-cols-2">
+        <Link to={"/"} className="justify-self-center ">
+          <img src={data && data.logoColor} className="w-56" />
+        </Link>
 
-      <div className="primary-btn justify-self-end " onClick={openModal}>
-        Upload
+        <div className="primary-btn justify-self-end " onClick={openModal}>
+          Upload
+        </div>
       </div>
 
       <Modal

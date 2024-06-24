@@ -16,7 +16,7 @@ const customStyles = {
     flexDirection: "row-reverse",
     minWidth: "300px",
     border: "1px solid black",
-    borderRadius: "60px"
+    borderRadius: "60px",
   }),
   clearIndicator: (base: any) => ({
     ...base,
@@ -53,31 +53,32 @@ export const SearchBar: React.FC = () => {
   const { data, isSuccess, isLoading } = useGetVideosByUserIdQuery(userId);
   const navigate = useNavigate();
 
-  const handleOptionChange = (newValue: SingleValue<VideoOption>, actionMeta: ActionMeta<VideoOption>) => {
-    console.log(actionMeta)
-    newValue && navigate(`/videos/${newValue.value}`)
-  }
+  const handleOptionChange = (
+    newValue: SingleValue<VideoOption>,
+    actionMeta: ActionMeta<VideoOption>
+  ) => {
+    console.log(actionMeta);
+    newValue && navigate(`/videos/${newValue.value}`);
+  };
   return (
-    <div className="flex w-1/3">
-      <Select
-        options={
-          isSuccess
-            ? data.videos.map((video) => {
-                return { label: video.title, value: video.id };
-              })
-            : []
-        }
-        isClearable={true}
-        isSearchable={true}
-        components={{
-          IndicatorSeparator: () => null,
-          DropdownIndicator,
-        }}
-        styles={customStyles}
-        formatOptionLabel={OptionLabel}
-        isLoading={isLoading}
-        onChange={handleOptionChange}
-      />
-    </div>
+    <Select
+      options={
+        isSuccess
+          ? data.videos.map((video) => {
+              return { label: video.title, value: video.id };
+            })
+          : []
+      }
+      isClearable={true}
+      isSearchable={true}
+      components={{
+        IndicatorSeparator: () => null,
+        DropdownIndicator,
+      }}
+      styles={customStyles}
+      formatOptionLabel={OptionLabel}
+      isLoading={isLoading}
+      onChange={handleOptionChange}
+    />
   );
 };
